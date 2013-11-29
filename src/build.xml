@@ -1,0 +1,75 @@
+<project name="ARYMPTest" default="compile" basedir="." >
+    <description>
+        ARYMP Tests
+    </description>
+  
+  <property name="project_name" value="ARYMPTests"/>
+  <property name="src" location="./com/rs"/>
+  <property name="build" location="${user.home}/ARYMPTest/bin"/>
+  <property name="res"  location="${user.home}/ARYMPTest/res"/>
+  <property name="reports" location="${user.home}/ARYMPTest/reports"/>
+
+  <path id="project.classes">
+  	<pathelement location="${build}" />
+  	<fileset dir="${basedir}/../lib">
+  		<include name="**/*.jar"/>
+  	</fileset>
+  </path>
+	
+  <target name="compile" depends="clean, init" description="Compiling ..." >
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false" encoding="UTF-8">  
+			<classpath refid="project.classes" />
+		</javac>
+  </target>
+
+    <target name="test" depends="compile" description="Run tests ...">
+            <junit printsummary="yes" fork="yes" haltonerror="no" showoutput="true">
+            	<jvmarg value="-Dfile.encoding=UTF-8"/>
+            	<classpath refid="project.classes" />
+            	<sysproperty key="ary.path" value="${ary.path}" />
+            	<sysproperty key="instance.name" value="${instance.name}" />
+            	<sysproperty key="instance.port" value="${instance.port}" />
+            	<sysproperty key="db.name" value="${db.name}" />
+            	<sysproperty key="ds.name" value="${ds.name}" />
+            	<sysproperty key="ds.user" value="${ds.user}" />
+            	<sysproperty key="db.user" value="${db.user}" />
+            	<sysproperty key="ds.pw" value="${ds.pw}" />
+            	<sysproperty key="db.pw" value="${db.pw}" />
+            	<sysproperty key="log.path" value="${log.path}" />
+            	<sysproperty key="backup.path" value="${backup.path}" />
+            	<sysproperty key="tl.api.url" value="${tl.api.url}" />
+            	<sysproperty key="tl.dev.key" value="${tl.dev.key}" />
+            	<sysproperty key="test.name" value="${test.name}" />
+            	<formatter type="xml"/>
+            	<batchtest fork="yes" todir="${reports}">
+            		<fileset dir="${build}">
+            		<include name="**/${test.name}*.class"/>
+            		</fileset>
+            	</batchtest> 
+            </junit>
+    	
+		<junitreport todir="${reports}">
+		  <fileset dir="${reports}">
+		    <include name="TEST-*.xml"/>
+		  </fileset>
+		  <report format="frames" todir="${reports}"/>
+		</junitreport>
+    </target>
+	
+
+  <target name="clean"   description="clean up" >
+    <delete dir="${build}"/>
+    <delete dir="${reports}"/>
+  </target>
+	
+ <target name="init" depends="clean" description="initialize the build environment" >
+    <tstamp/>
+    <mkdir dir="${build}"/>
+    <mkdir dir="${reports}"/>
+  </target>
+  
+  <target name="all" depends="clean, test">
+  	
+  </target>
+  
+</project>

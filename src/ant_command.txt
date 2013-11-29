@@ -1,0 +1,1 @@
+ant test -Dary.path="C:\\re4100" -Dinstance.name "DB2" -Dinstance.port "50000" -Ddb.name "carolv1" -Dds.name "datastor" -Dds.user "DB2ADMIN" -Ddb.user "DB2ADMIN" -Dds.pw "R0cket" -Ddb.pw "R0cket" -Dtl.api.url "http://testlink.rocketsoftware.com/testlink/lib/api/xmlrpc/v1/xmlrpc.php" -Dtl.dev.key "dfae6dd9d5e8ab97f316bcd89f7c676c" -Dtest.name "TestLACarolV"
