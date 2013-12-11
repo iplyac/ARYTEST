@@ -10,13 +10,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
+import java.sql.PseudoColumnUsage;
 import java.sql.SQLException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.junit.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -27,22 +30,27 @@ import com.rs.tests.ATestCases;
 public class TestCaseSetUp {
 
 	public static void createDB(String TargetDB){
-			System.out.println("create database "+ TargetDB +"...");
+			ConsoleWriter.println("create database "+ TargetDB +"...");
 			runCMD("db2 create db " + TargetDB);
 	}
 	
 	public static void dropDB(String TargetDB){
-			System.out.println("drop database "+ TargetDB +"...");
+			ConsoleWriter.println("drop database "+ TargetDB +"...");
 			runCMD("db2 drop db " + TargetDB);
 	}
+
+	public static void init(){
+		ConsoleWriter.println("Init...");
+		runCMD("db2cmd -i -w db2clpsetcp");
+}
 	
 	public static void updateLogarchmeth1(String TargetDB,String LOGARCHMETH1){
-			System.out.println("update database config...");
+			ConsoleWriter.println("update database config...");
 			runCMD("db2 update db cfg for "+TargetDB+" using logarchmeth1 disk:" + LOGARCHMETH1);
 	}
 
 	public static void makeOfflineBackup(String TargetDB,String BACKUP_PATH){
-			System.out.println("backup database...");
+			ConsoleWriter.println("backup database...");
 			runCMD("db2 backup db "+TargetDB+" on all dbpartitionnums to "+BACKUP_PATH);
 	}
 	
@@ -59,12 +67,10 @@ public class TestCaseSetUp {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					p.getInputStream(),"UTF-8"));
 
-			PrintWriter out = new PrintWriter(new OutputStreamWriter(System.out,System.getProperty("file.encoding"))); 
 			String inputLine;
 			
 			while ((inputLine = reader.readLine()) != null) {
-				out.println(inputLine);
-				out.flush();
+				ConsoleWriter.println(inputLine);
 				}
 			p.waitFor();
 //			Assert.assertEquals(0, p.exitValue());
@@ -81,6 +87,7 @@ public class TestCaseSetUp {
 		DocumentBuilder dBuilder;
 		Element statement;
 		PreparedStatement pStmt = null;
+		CallableStatement cStmt = null;
 		File LobFile = null;
 		InputStream fis = null;
 		
@@ -89,16 +96,35 @@ public class TestCaseSetUp {
 			fis = new BufferedInputStream(new FileInputStream(LobFile));
 			fis.mark((int) LobFile.length() << 1);
 		}
+/*go through all xml files*/
 		for (String xmlFile:xmlFiles){
 			try {
 				dBuilder = dbFactory.newDocumentBuilder();
 				Document doc = dBuilder.parse(ATestCases.PathToSQL+ File.separator + xmlFile);
 				NodeList StatementList = doc.getElementsByTagName("statement");
 				
+				NodeList TestCases = doc.getElementsByTagName("testcasesetup");
+				Element testcase = (Element)TestCases.item(0);
+				
+				try{
+				if (testcase.getAttribute("autocommit").equals("no"))DataStoreUtil.getDbConnection().setAutoCommit(false); else DataStoreUtil.getDbConnection().setAutoCommit(true); 
+				}catch (SQLException ex) {
+					System.err.println("error on set autocommit value");
+					}
+				
+				/*go through all statements in current file*/	
 				for (int stmt_id = 0; stmt_id < StatementList.getLength(); stmt_id++) {
+					
 				    statement = (Element)StatementList.item(stmt_id);
-					ConsoleWriter.println(statement.getAttribute("stmt_id") +" "+ statement.getTextContent());
+				    ConsoleWriter.println(xmlFile+" : "+statement.getAttribute("stmt_id") +" "+ statement.getTextContent());
+					
 					try {
+						if (statement.getAttribute("call").equals("yes"))
+						{
+							cStmt = DataStoreUtil.dbConnection.prepareCall(statement.getTextContent());
+							cStmt.execute();
+						}	
+						else{
 						pStmt = DataStoreUtil.dbConnection.prepareStatement(statement.getTextContent());
 						if ( withLobs && ( statement.getTextContent().indexOf(" ? ")>0 )) 
 							{
@@ -107,6 +133,7 @@ public class TestCaseSetUp {
 							}
 						pStmt.executeUpdate();
 						pStmt.close();
+						}
 					} 
 					catch (SQLException ex) {
 						System.err.println("SQLException information");
@@ -114,9 +141,10 @@ public class TestCaseSetUp {
 					        System.err.println ("Error msg: "  + ex.getMessage());
 					        System.err.println ("SQLSTATE: "   + ex.getSQLState());
 					        System.err.println ("Error code: " + ex.getErrorCode());
-					        ex.printStackTrace();
 					        ex = ex.getNextException(); 
 								}
+						}finally{
+							SqlUtil.closeStatement(pStmt);
 						}
 				}
 			} catch (SAXException | IOException | ParserConfigurationException e) {

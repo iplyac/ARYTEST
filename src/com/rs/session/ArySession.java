@@ -1,20 +1,12 @@
 package com.rs.session;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
-
-
-import org.junit.Assert;
-
-
 import com.rs.tests.ATestCases;
 import com.rs.utils.AryCredentials;
 import com.rs.utils.ArySqlQueries;
@@ -156,7 +148,6 @@ protected void runprocess(String command){
 	
         //--> fill ARY_OPTS
         fillDsOpts();
-        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0){
         	try
             {
         callStmt = DataStoreUtil.getDsConnection().prepareCall(getRunAgentCommand());
@@ -190,16 +181,6 @@ protected void runprocess(String command){
         	{
         		SqlUtil.closeStatement(callStmt);
         	}
-        }else{
-        	try {
-				Process p = Runtime.getRuntime().exec(getPathToAryRun(ATestCases.ARY_PATH) + command);
-				ConsoleWriter.println(getPathToAryRun(ATestCases.ARY_PATH) + command);
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}
-        }
-   
 	
 	SessionLogWriter sessionLogWriter = new SessionLogWriter(SessionID);
 	sessionLogWriter.start();

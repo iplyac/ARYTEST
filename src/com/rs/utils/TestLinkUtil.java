@@ -97,6 +97,7 @@ public class TestLinkUtil {
 		byte[] decodedCompressedAttachment = null;
 		byte[] decompressedData = null;
 		
+		if (attachments.length > 0){
 		for (Attachment attachment : attachments)
 			if (attachment.getFileName().equals(FileName))
 				//decode attached file from Base64
@@ -105,6 +106,10 @@ public class TestLinkUtil {
 		decompressedData = decompress(decodedCompressedAttachment);
 		
 		return (new String(decompressedData));
+		}else{
+			ConsoleWriter.println("No attachmant in test case");
+			return "";
+		}
 	}
 	
 /**

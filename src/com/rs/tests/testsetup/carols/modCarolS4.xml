@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testcasesetup><SQL><statement stmt_id="0">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 90</statement><statement stmt_id="1">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 90</statement><statement stmt_id="2">update CarolS set BLOB30=NULL WHERE IDCOLINT = 115</statement><statement stmt_id="3">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 115</statement><statement stmt_id="4">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 91</statement><statement stmt_id="5">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 91</statement><statement stmt_id="6">update CarolS set BLOB30=NULL WHERE IDCOLINT = 116</statement><statement stmt_id="7">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 116</statement><statement stmt_id="8">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 92</statement><statement stmt_id="9">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 92</statement><statement stmt_id="10">update CarolS set BLOB30=NULL WHERE IDCOLINT = 117</statement><statement stmt_id="11">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 117</statement><statement stmt_id="12">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 93</statement><statement stmt_id="13">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 93</statement><statement stmt_id="14">update CarolS set BLOB30=NULL WHERE IDCOLINT = 118</statement><statement stmt_id="15">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 118</statement><statement stmt_id="16">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 94</statement><statement stmt_id="17">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 94</statement><statement stmt_id="18">update CarolS set BLOB30=NULL WHERE IDCOLINT = 119</statement><statement stmt_id="19">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 119</statement><statement stmt_id="20">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 95</statement><statement stmt_id="21">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 95</statement><statement stmt_id="22">update CarolS set BLOB30=NULL WHERE IDCOLINT = 120</statement><statement stmt_id="23">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 120</statement><statement stmt_id="24">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 96</statement><statement stmt_id="25">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 96</statement><statement stmt_id="26">update CarolS set BLOB30=NULL WHERE IDCOLINT = 121</statement><statement stmt_id="27">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 121</statement><statement stmt_id="28">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 97</statement><statement stmt_id="29">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 97</statement><statement stmt_id="30">update CarolS set BLOB30=NULL WHERE IDCOLINT = 122</statement><statement stmt_id="31">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 122</statement><statement stmt_id="32">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 98</statement><statement stmt_id="33">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 98</statement><statement stmt_id="34">update CarolS set BLOB30=NULL WHERE IDCOLINT = 123</statement><statement stmt_id="35">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 123</statement><statement stmt_id="36">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 99</statement><statement stmt_id="37">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 99</statement><statement stmt_id="38">update CarolS set BLOB30=NULL WHERE IDCOLINT = 124</statement><statement stmt_id="39">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 124</statement><statement stmt_id="40">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 100</statement><statement stmt_id="41">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 100</statement><statement stmt_id="42">update CarolS set BLOB30=NULL WHERE IDCOLINT = 125</statement><statement stmt_id="43">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 125</statement><statement stmt_id="44">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 101</statement><statement stmt_id="45">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 101</statement><statement stmt_id="46">update CarolS set BLOB30=NULL WHERE IDCOLINT = 126</statement><statement stmt_id="47">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 126</statement><statement stmt_id="48">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 102</statement><statement stmt_id="49">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 102</statement><statement stmt_id="50">update CarolS set BLOB30=NULL WHERE IDCOLINT = 127</statement><statement stmt_id="51">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 127</statement><statement stmt_id="52">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 103</statement><statement stmt_id="53">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 103</statement><statement stmt_id="54">update CarolS set BLOB30=NULL WHERE IDCOLINT = 128</statement><statement stmt_id="55">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 128</statement><statement stmt_id="56">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 104</statement><statement stmt_id="57">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 104</statement><statement stmt_id="58">update CarolS set BLOB30=NULL WHERE IDCOLINT = 129</statement><statement stmt_id="59">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 129</statement><statement stmt_id="60">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 105</statement><statement stmt_id="61">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 105</statement><statement stmt_id="62">update CarolS set BLOB30=NULL WHERE IDCOLINT = 130</statement><statement stmt_id="63">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 130</statement><statement stmt_id="64">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 106</statement><statement stmt_id="65">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 106</statement><statement stmt_id="66">update CarolS set BLOB30=NULL WHERE IDCOLINT = 131</statement><statement stmt_id="67">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 131</statement><statement stmt_id="68">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 107</statement><statement stmt_id="69">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 107</statement><statement stmt_id="70">update CarolS set BLOB30=NULL WHERE IDCOLINT = 132</statement><statement stmt_id="71">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 132</statement><statement stmt_id="72">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 108</statement><statement stmt_id="73">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 108</statement><statement stmt_id="74">update CarolS set BLOB30=NULL WHERE IDCOLINT = 133</statement><statement stmt_id="75">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 133</statement><statement stmt_id="76">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 109</statement><statement stmt_id="77">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 109</statement><statement stmt_id="78">update CarolS set BLOB30=NULL WHERE IDCOLINT = 134</statement><statement stmt_id="79">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 134</statement><statement stmt_id="80">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 110</statement><statement stmt_id="81">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 110</statement><statement stmt_id="82">update CarolS set BLOB30=NULL WHERE IDCOLINT = 135</statement><statement stmt_id="83">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 135</statement><statement stmt_id="84">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 111</statement><statement stmt_id="85">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 111</statement><statement stmt_id="86">update CarolS set BLOB30=NULL WHERE IDCOLINT = 136</statement><statement stmt_id="87">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 136</statement><statement stmt_id="88">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 112</statement><statement stmt_id="89">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 112</statement><statement stmt_id="90">update CarolS set BLOB30=NULL WHERE IDCOLINT = 137</statement><statement stmt_id="91">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 137</statement><statement stmt_id="92">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 113</statement><statement stmt_id="93">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 113</statement><statement stmt_id="94">update CarolS set BLOB30=NULL WHERE IDCOLINT = 138</statement><statement stmt_id="95">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 138</statement><statement stmt_id="96">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 114</statement><statement stmt_id="97">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 114</statement><statement stmt_id="98">update CarolS set BLOB30=NULL WHERE IDCOLINT = 139</statement><statement stmt_id="99">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 139</statement><statement stmt_id="100">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 115</statement><statement stmt_id="101">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 115</statement><statement stmt_id="102">update CarolS set BLOB30=NULL WHERE IDCOLINT = 140</statement><statement stmt_id="103">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 140</statement><statement stmt_id="104">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 116</statement><statement stmt_id="105">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 116</statement><statement stmt_id="106">update CarolS set BLOB30=NULL WHERE IDCOLINT = 141</statement><statement stmt_id="107">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 141</statement><statement stmt_id="108">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 117</statement><statement stmt_id="109">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 117</statement><statement stmt_id="110">update CarolS set BLOB30=NULL WHERE IDCOLINT = 142</statement><statement stmt_id="111">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 142</statement><statement stmt_id="112">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 118</statement><statement stmt_id="113">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 118</statement><statement stmt_id="114">update CarolS set BLOB30=NULL WHERE IDCOLINT = 143</statement><statement stmt_id="115">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 143</statement><statement stmt_id="116">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 119</statement><statement stmt_id="117">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 119</statement><statement stmt_id="118">update CarolS set BLOB30=NULL WHERE IDCOLINT = 144</statement><statement stmt_id="119">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 144</statement><statement stmt_id="120">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 120</statement><statement stmt_id="121">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 120</statement><statement stmt_id="122">update CarolS set BLOB30=NULL WHERE IDCOLINT = 145</statement><statement stmt_id="123">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 145</statement><statement stmt_id="124">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 121</statement><statement stmt_id="125">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 121</statement><statement stmt_id="126">update CarolS set BLOB30=NULL WHERE IDCOLINT = 146</statement><statement stmt_id="127">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 146</statement><statement stmt_id="128">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 122</statement><statement stmt_id="129">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 122</statement><statement stmt_id="130">update CarolS set BLOB30=NULL WHERE IDCOLINT = 147</statement><statement stmt_id="131">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 147</statement><statement stmt_id="132">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 123</statement><statement stmt_id="133">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 123</statement><statement stmt_id="134">update CarolS set BLOB30=NULL WHERE IDCOLINT = 148</statement><statement stmt_id="135">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 148</statement><statement stmt_id="136">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 124</statement><statement stmt_id="137">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 124</statement><statement stmt_id="138">update CarolS set BLOB30=NULL WHERE IDCOLINT = 149</statement><statement stmt_id="139">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 149</statement><statement stmt_id="140">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 125</statement><statement stmt_id="141">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 125</statement><statement stmt_id="142">update CarolS set BLOB30=NULL WHERE IDCOLINT = 150</statement><statement stmt_id="143">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 150</statement><statement stmt_id="144">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 126</statement><statement stmt_id="145">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 126</statement><statement stmt_id="146">update CarolS set BLOB30=NULL WHERE IDCOLINT = 151</statement><statement stmt_id="147">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 151</statement><statement stmt_id="148">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 127</statement><statement stmt_id="149">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 127</statement><statement stmt_id="150">update CarolS set BLOB30=NULL WHERE IDCOLINT = 152</statement><statement stmt_id="151">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 152</statement><statement stmt_id="152">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 128</statement><statement stmt_id="153">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 128</statement><statement stmt_id="154">update CarolS set BLOB30=NULL WHERE IDCOLINT = 153</statement><statement stmt_id="155">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 153</statement><statement stmt_id="156">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 129</statement><statement stmt_id="157">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 129</statement><statement stmt_id="158">update CarolS set BLOB30=NULL WHERE IDCOLINT = 154</statement><statement stmt_id="159">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 154</statement><statement stmt_id="160">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 130</statement><statement stmt_id="161">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 130</statement><statement stmt_id="162">update CarolS set BLOB30=NULL WHERE IDCOLINT = 155</statement><statement stmt_id="163">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 155</statement><statement stmt_id="164">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 131</statement><statement stmt_id="165">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 131</statement><statement stmt_id="166">update CarolS set BLOB30=NULL WHERE IDCOLINT = 156</statement><statement stmt_id="167">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 156</statement><statement stmt_id="168">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 132</statement><statement stmt_id="169">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 132</statement><statement stmt_id="170">update CarolS set BLOB30=NULL WHERE IDCOLINT = 157</statement><statement stmt_id="171">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 157</statement><statement stmt_id="172">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 133</statement><statement stmt_id="173">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 133</statement><statement stmt_id="174">update CarolS set BLOB30=NULL WHERE IDCOLINT = 158</statement><statement stmt_id="175">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 158</statement><statement stmt_id="176">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 134</statement><statement stmt_id="177">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 134</statement><statement stmt_id="178">update CarolS set BLOB30=NULL WHERE IDCOLINT = 159</statement><statement stmt_id="179">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 159</statement><statement stmt_id="180">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 135</statement><statement stmt_id="181">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 135</statement><statement stmt_id="182">update CarolS set BLOB30=NULL WHERE IDCOLINT = 160</statement><statement stmt_id="183">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 160</statement><statement stmt_id="184">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 136</statement><statement stmt_id="185">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 136</statement><statement stmt_id="186">update CarolS set BLOB30=NULL WHERE IDCOLINT = 161</statement><statement stmt_id="187">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 161</statement><statement stmt_id="188">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 137</statement><statement stmt_id="189">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 137</statement><statement stmt_id="190">update CarolS set BLOB30=NULL WHERE IDCOLINT = 162</statement><statement stmt_id="191">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 162</statement><statement stmt_id="192">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 138</statement><statement stmt_id="193">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 138</statement><statement stmt_id="194">update CarolS set BLOB30=NULL WHERE IDCOLINT = 163</statement><statement stmt_id="195">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 163</statement><statement stmt_id="196">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 139</statement><statement stmt_id="197">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 139</statement><statement stmt_id="198">update CarolS set BLOB30=NULL WHERE IDCOLINT = 164</statement><statement stmt_id="199">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 164</statement><statement stmt_id="200">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 140</statement><statement stmt_id="201">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 140</statement><statement stmt_id="202">update CarolS set BLOB30=NULL WHERE IDCOLINT = 165</statement><statement stmt_id="203">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 165</statement><statement stmt_id="204">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 141</statement><statement stmt_id="205">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 141</statement><statement stmt_id="206">update CarolS set BLOB30=NULL WHERE IDCOLINT = 166</statement><statement stmt_id="207">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 166</statement><statement stmt_id="208">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 142</statement><statement stmt_id="209">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 142</statement><statement stmt_id="210">update CarolS set BLOB30=NULL WHERE IDCOLINT = 167</statement><statement stmt_id="211">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 167</statement><statement stmt_id="212">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 143</statement><statement stmt_id="213">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 143</statement><statement stmt_id="214">update CarolS set BLOB30=NULL WHERE IDCOLINT = 168</statement><statement stmt_id="215">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 168</statement><statement stmt_id="216">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 144</statement><statement stmt_id="217">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 144</statement><statement stmt_id="218">update CarolS set BLOB30=NULL WHERE IDCOLINT = 169</statement><statement stmt_id="219">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 169</statement><statement stmt_id="220">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 145</statement><statement stmt_id="221">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 145</statement><statement stmt_id="222">update CarolS set BLOB30=NULL WHERE IDCOLINT = 170</statement><statement stmt_id="223">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 170</statement><statement stmt_id="224">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 146</statement><statement stmt_id="225">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 146</statement><statement stmt_id="226">update CarolS set BLOB30=NULL WHERE IDCOLINT = 171</statement><statement stmt_id="227">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 171</statement><statement stmt_id="228">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 147</statement><statement stmt_id="229">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 147</statement><statement stmt_id="230">update CarolS set BLOB30=NULL WHERE IDCOLINT = 172</statement><statement stmt_id="231">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 172</statement><statement stmt_id="232">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 148</statement><statement stmt_id="233">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 148</statement><statement stmt_id="234">update CarolS set BLOB30=NULL WHERE IDCOLINT = 173</statement><statement stmt_id="235">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 173</statement><statement stmt_id="236">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 149</statement><statement stmt_id="237">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 149</statement><statement stmt_id="238">update CarolS set BLOB30=NULL WHERE IDCOLINT = 174</statement><statement stmt_id="239">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 174</statement><statement stmt_id="240">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 150</statement><statement stmt_id="241">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 150</statement><statement stmt_id="242">update CarolS set BLOB30=NULL WHERE IDCOLINT = 175</statement><statement stmt_id="243">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 175</statement><statement stmt_id="244">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 151</statement><statement stmt_id="245">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 151</statement><statement stmt_id="246">update CarolS set BLOB30=NULL WHERE IDCOLINT = 176</statement><statement stmt_id="247">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 176</statement><statement stmt_id="248">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 152</statement><statement stmt_id="249">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 152</statement><statement stmt_id="250">update CarolS set BLOB30=NULL WHERE IDCOLINT = 177</statement><statement stmt_id="251">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 177</statement><statement stmt_id="252">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 153</statement><statement stmt_id="253">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 153</statement><statement stmt_id="254">update CarolS set BLOB30=NULL WHERE IDCOLINT = 178</statement><statement stmt_id="255">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 178</statement><statement stmt_id="256">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 154</statement><statement stmt_id="257">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 154</statement><statement stmt_id="258">update CarolS set BLOB30=NULL WHERE IDCOLINT = 179</statement><statement stmt_id="259">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 179</statement><statement stmt_id="260">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 155</statement><statement stmt_id="261">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 155</statement><statement stmt_id="262">update CarolS set BLOB30=NULL WHERE IDCOLINT = 180</statement><statement stmt_id="263">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 180</statement><statement stmt_id="264">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 156</statement><statement stmt_id="265">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 156</statement><statement stmt_id="266">update CarolS set BLOB30=NULL WHERE IDCOLINT = 181</statement><statement stmt_id="267">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 181</statement><statement stmt_id="268">
+update CarolS set CLOB30=NULL WHERE IDCOLINT = 157</statement><statement stmt_id="269">update CarolS set CLOB30=CLOB('Updated-after-NULL') WHERE IDCOLINT = 157</statement><statement stmt_id="270">update CarolS set BLOB30=NULL WHERE IDCOLINT = 182</statement><statement stmt_id="271">update CarolS set BLOB30=BLOB('NULL')  WHERE IDCOLINT = 182</statement><statement stmt_id="272">
+INSERT INTO CarolS
+      (RECID,FILENO,
+       FLOAT4NN,FLOAT4NNWD,FLOAT4WDN,FLOAT4WD,FLOAT8,
+       INTCOLNN,INTCOLNND,INTCOLNNWD,INTCOLWDN,
+       SMINT,CHARCHCK,DEC150,
+       NUMERIC83NN,NUMERIC83NND,NUMERIC83NNWD,NUMERIC83WDN,
+       CHAR8NN,CHAR8NND,CHAR8NNWD,CHAR8WDN,CHAR15D,CHAR8WD,
+       CHAR8DU,CHAR8WDU,CHAR8WDCS,CHAR8DCS,
+       CHAR1,CHAR1CC1,CHAR7,CHAR7SBCS,CHAR7BIT,
+       VCHAR20,VCHAR20SBCS,VCHAR20BIT,
+       VCHAR20NN,VCHAR20NND,VCHAR20NNWD,VCHAR20WDN,
+       LVCHAR,LVCHARSBCS,LVCHARBIT,
+       DATE1,DATE1DN,TIME1,TIME1DN,
+       TIMESTMP,TIMESTMPNN,
+       REAL1,DOUBLE1,SORT_FIELD,
+       CHARWD1,CHARWD2,VCHAR20WD,LVCHAR20WD,
+       DEFUSER,DEFSQLID,DEFNULL,
+       DATE2,TIMESTAMP2,
+       IDCOLINT,CLOB30,CLOB30SBCS,
+       BLOB30, LONGVC)
+VALUES
+  ('912', 'YZY',
+   1.2E+35, 1.2E+02, 1.2E+35, 1.2E+35, 1.2E+02,
+   2147483647, 01234, 1234567890, 2145678901,
+   32767, 'CHARCHCK', 999.,
+   99999.999, 999.999, 99999.999, 99999.999,
+   'CHARNN  ','CHARNND ','CHARNNWD','CHARWDN ','CHARD','CHARWD  ',
+   'CHARDU  ', 'CHARWDU ', 'CHARWDCS', 'CHARDCS ',
+   'A', 'I', 'ADMF001', 'CHAR7SB', 'CHAR7BI',
+   'SAN JOSE', 'VCHAR20SBCS', ' 400 ',
+   'VCHAR20NN', 'VCHAR20NND', 'VCHAR20NNWD', 'VCHAR20WDN',
+   NULL, NULL, ' 400 ',
+   '1983-04-25', '1986-07-25', '16.57.44', '12.58.59',
+   '1986-07-24-12.57.57.3000', '1986-07-25-12.58.57.3000',
+   1.2E+02, 1.2E+02, 'aaCDEFGHIJKLMNOPQRSTUVWXYZ1023456789 %*+',
+   'AzbY019%', '123', 'VCHAR20DEFAULT', 'LONGVCHAR20DEFAULT',
+   'STLVMUSR','STLVMUID',NULL,
+   '1994-12-13', '1994-12-13-12.47.00.00',
+   DEFAULT, CLOB('CLOB30'), CLOB('CLOB30'),
+   BLOB('BLOB30'), 'AAABBBCCCDDD')</statement><statement stmt_id="273">
+INSERT INTO CarolS
+      (RECID,FILENO,
+       FLOAT4NN,FLOAT4NNWD,FLOAT4WDN,FLOAT4WD,FLOAT8,
+       INTCOLNN,INTCOLNND,INTCOLNNWD,INTCOLWDN,
+       SMINT,CHARCHCK,DEC150,
+       NUMERIC83NN,NUMERIC83NND,NUMERIC83NNWD,NUMERIC83WDN,
+       CHAR8NN,CHAR8NND,CHAR8NNWD,CHAR8WDN,CHAR15D,CHAR8WD,
+       CHAR8DU,CHAR8WDU,CHAR8WDCS,CHAR8DCS,
+       CHAR1,CHAR1CC1,CHAR7,CHAR7SBCS,CHAR7BIT,
+       VCHAR20,VCHAR20SBCS,VCHAR20BIT,
+       VCHAR20NN,VCHAR20NND,VCHAR20NNWD,VCHAR20WDN,
+       LVCHAR,LVCHARSBCS,LVCHARBIT,
+       DATE1,DATE1DN,TIME1,TIME1DN,
+       TIMESTMP,TIMESTMPNN,
+       REAL1,DOUBLE1,SORT_FIELD,
+       CHARWD1,CHARWD2,VCHAR20WD,LVCHAR20WD,
+       DEFUSER,DEFSQLID,DEFNULL,
+       DATE2,TIMESTAMP2,
+       IDCOLINT,CLOB30,CLOB30SBCS,
+       BLOB30, LONGVC)
+VALUES
+  ('915', 'YZY',
+   1.2E+35, 1.2E+02, 1.2E+35, 1.2E+35, 1.2E+02,
+   2147483647, 01234, 1234567890, 2145678901,
+   32767, 'CHARCHCK', 999.,
+   99999.999, 999.999, 99999.999, 99999.999,
+   'CHARNN  ','CHARNND ','CHARNNWD','CHARWDN ','CHARD','CHARWD  ',
+   'CHARDU  ', 'CHARWDU ', 'CHARWDCS', 'CHARDCS ',
+   'A', 'I', 'ADMF001', 'CHAR7SB', 'CHAR7BI',
+   'SAN JOSE', 'VCHAR20SBCS', ' 400 ',
+   'VCHAR20NN', 'VCHAR20NND', 'VCHAR20NNWD', 'VCHAR20WDN',
+   NULL, NULL, ' 400 ',
+   '1983-04-25', '1986-07-25', '16.57.44', '12.58.59',
+   '1986-07-24-12.57.57.3000', '1986-07-25-12.58.57.3000',
+   1.2E+02, 1.2E+02, 'aaCDEFGHIJKLMNOPQRSTUVWXYZ1023456789 %*+',
+   'AzbY019%', '123', 'VCHAR20DEFAULT', 'LONGVCHAR20DEFAULT',
+   'STLVMUSR','STLVMUID',NULL,
+   '1994-12-13', '1994-12-13-12.47.00.00',
+   DEFAULT, CLOB('CLOB30'), CLOB('CLOB30'),
+   BLOB('BLOB30'), 'AAABBBCCCDDD')</statement><statement stmt_id="274">
+INSERT INTO CarolS
+      (RECID,FILENO,
+       FLOAT4NN,FLOAT4NNWD,FLOAT4WDN,FLOAT4WD,FLOAT8,
+       INTCOLNN,INTCOLNND,INTCOLNNWD,INTCOLWDN,
+       SMINT,CHARCHCK,DEC150,
+       NUMERIC83NN,NUMERIC83NND,NUMERIC83NNWD,NUMERIC83WDN,
+       CHAR8NN,CHAR8NND,CHAR8NNWD,CHAR8WDN,CHAR15D,CHAR8WD,
+       CHAR8DU,CHAR8WDU,CHAR8WDCS,CHAR8DCS,
+       CHAR1,CHAR1CC1,CHAR7,CHAR7SBCS,CHAR7BIT,
+       VCHAR20,VCHAR20SBCS,VCHAR20BIT,
+       VCHAR20NN,VCHAR20NND,VCHAR20NNWD,VCHAR20WDN,
+       LVCHAR,LVCHARSBCS,LVCHARBIT,
+       DATE1,DATE1DN,TIME1,TIME1DN,
+       TIMESTMP,TIMESTMPNN,
+       REAL1,DOUBLE1,SORT_FIELD,
+       CHARWD1,CHARWD2,VCHAR20WD,LVCHAR20WD,
+       DEFUSER,DEFSQLID,DEFNULL,
+       DATE2,TIMESTAMP2,
+       IDCOLINT,CLOB30,CLOB30SBCS,
+       BLOB30, LONGVC)
+VALUES
+  ('914', 'YZY',
+   1.2E+35, 1.2E+02, 1.2E+35, 1.2E+35, 1.2E+02,
+   2147483647, 01234, 1234567890, 2145678901,
+   32767, 'CHARCHCK', 999.,
+   99999.999, 999.999, 99999.999, 99999.999,
+   'CHARNN  ','CHARNND ','CHARNNWD','CHARWDN ','CHARD','CHARWD  ',
+   'CHARDU  ', 'CHARWDU ', 'CHARWDCS', 'CHARDCS ',
+   'A', 'I', 'ADMF001', 'CHAR7SB', 'CHAR7BI',
+   'SAN JOSE', 'VCHAR20SBCS', ' 400 ',
+   'VCHAR20NN', 'VCHAR20NND', 'VCHAR20NNWD', 'VCHAR20WDN',
+   NULL, NULL, ' 400 ',
+   '1983-04-25', '1986-07-25', '16.57.44', '12.58.59',
+   '1986-07-24-12.57.57.3000', '1986-07-25-12.58.57.3000',
+   1.2E+02, 1.2E+02, 'aaCDEFGHIJKLMNOPQRSTUVWXYZ1023456789 %*+',
+   'AzbY019%', '123', 'VCHAR20DEFAULT', 'LONGVCHAR20DEFAULT',
+   'STLVMUSR','STLVMUID',NULL,
+   '1994-12-13', '1994-12-13-12.47.00.00',
+   DEFAULT, CLOB('CLOB30'), CLOB('CLOB30'),
+   BLOB('BLOB30'), 'AAABBBCCCDDD')</statement><statement stmt_id="275">
+INSERT INTO CarolS
+      (RECID,FILENO,
+       FLOAT4NN,FLOAT4NNWD,FLOAT4WDN,FLOAT4WD,FLOAT8,
+       INTCOLNN,INTCOLNND,INTCOLNNWD,INTCOLWDN,
+       SMINT,CHARCHCK,DEC150,
+       NUMERIC83NN,NUMERIC83NND,NUMERIC83NNWD,NUMERIC83WDN,
+       CHAR8NN,CHAR8NND,CHAR8NNWD,CHAR8WDN,CHAR15D,CHAR8WD,
+       CHAR8DU,CHAR8WDU,CHAR8WDCS,CHAR8DCS,
+       CHAR1,CHAR1CC1,CHAR7,CHAR7SBCS,CHAR7BIT,
+       VCHAR20,VCHAR20SBCS,VCHAR20BIT,
+       VCHAR20NN,VCHAR20NND,VCHAR20NNWD,VCHAR20WDN,
+       LVCHAR,LVCHARSBCS,LVCHARBIT,
+       DATE1,DATE1DN,TIME1,TIME1DN,
+       TIMESTMP,TIMESTMPNN,
+       REAL1,DOUBLE1,SORT_FIELD,
+       CHARWD1,CHARWD2,VCHAR20WD,LVCHAR20WD,
+       DEFUSER,DEFSQLID,DEFNULL,
+       DATE2,TIMESTAMP2,
+       IDCOLINT,CLOB30,CLOB30SBCS,
+       BLOB30, LONGVC)
+VALUES
+  ('913', 'YZY',
+   1.2E+35, 1.2E+02, 1.2E+35, 1.2E+35, 1.2E+02,
+   2147483647, 01234, 1234567890, 2145678901,
+   32767, 'CHARCHCK', 999.,
+   99999.999, 999.999, 99999.999, 99999.999,
+   'CHARNN  ','CHARNND ','CHARNNWD','CHARWDN ','CHARD','CHARWD  ',
+   'CHARDU  ', 'CHARWDU ', 'CHARWDCS', 'CHARDCS ',
+   'A', 'I', 'ADMF001', 'CHAR7SB', 'CHAR7BI',
+   'SAN JOSE', 'VCHAR20SBCS', ' 400 ',
+   'VCHAR20NN', 'VCHAR20NND', 'VCHAR20NNWD', 'VCHAR20WDN',
+   NULL, NULL, ' 400 ',
+   '1983-04-25', '1986-07-25', '16.57.44', '12.58.59',
+   '1986-07-24-12.57.57.3000', '1986-07-25-12.58.57.3000',
+   1.2E+02, 1.2E+02, 'aaCDEFGHIJKLMNOPQRSTUVWXYZ1023456789 %*+',
+   'AzbY019%', '123', 'VCHAR20DEFAULT', 'LONGVCHAR20DEFAULT',
+   'STLVMUSR','STLVMUID',NULL,
+   '1994-12-13', '1994-12-13-12.47.00.00',
+   DEFAULT, CLOB('CLOB30'), CLOB('CLOB30'),
+   BLOB('BLOB30'), 'AAABBBCCCDDD')</statement></SQL></testcasesetup>

@@ -73,12 +73,18 @@ public void LA_CarolV_RE_727() throws DecodingException, UnsupportedEncodingExce
 	
 	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
 		
+	String tblFilter = _credentials.DBUser + ".CAROLV";
+	String tbsFilter = "";
+    String pgFilter = "";
+	
 	la.RunLogAnalysis(ARY_PATH,
 					  DB2InstanceName,
 					  TargetDB, 
 					  DSName,
 					  _credentials,
-					  _credentials.DBUser + ".CAROLV", 
+					  tblFilter, 
+					  tbsFilter,
+					  pgFilter,
 					  AryLogAnalysis.Operation.INSERTS+
 					  AryLogAnalysis.Operation.UPDATES+
 					  AryLogAnalysis.Operation.DELETES, 
@@ -109,12 +115,18 @@ public void LA_CarolV_RE_727() throws DecodingException, UnsupportedEncodingExce
     expectedResultsList.removeAll(obtainedResultsList);
     assertTrue(expectedResultsList.isEmpty());
     
+    tblFilter = _credentials.DBUser + ".CAROLV";
+	tbsFilter = "";
+    pgFilter = "";
+    
     la.RunLogAnalysis(ARY_PATH,
 			  DB2InstanceName,
 			  TargetDB, 
 			  DSName,
 			  _credentials,
-			  _credentials.DBUser + ".CAROLV", 
+			  tblFilter, 
+			  tbsFilter,
+			  pgFilter,
 			  AryLogAnalysis.Operation.INSERTS+
 			  AryLogAnalysis.Operation.UPDATES+
 			  AryLogAnalysis.Operation.DELETES, 
@@ -155,12 +167,18 @@ public void LA_CarolV_RE_726() throws DecodingException, UnsupportedEncodingExce
 	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
 	xml = String.format(xml, "\""+DBUser+"\"");
     
+	String tblFilter = _credentials.DBUser + ".CAROLV";
+	String tbsFilter = "";
+    String pgFilter = "";
+	
 	la.RunLogAnalysis(ARY_PATH,
 					  DB2InstanceName,
 					  TargetDB, 
 					  DSName,
 					  _credentials,
-					  _credentials.DBUser + ".CAROLV", 
+					  tblFilter, 
+					  tbsFilter,
+					  pgFilter,
 					  AryLogAnalysis.Operation.INSERTS+
 					  AryLogAnalysis.Operation.UPDATES+
 					  AryLogAnalysis.Operation.DELETES, 
@@ -196,12 +214,18 @@ public void LA_CarolV_RE_725() throws DecodingException, UnsupportedEncodingExce
 	
 	xml = String.format(xml, "\""+DBUser+"\"");
 	
+	String tblFilter = _credentials.DBUser + ".CAROLV";
+	String tbsFilter = "";
+    String pgFilter = "";
+	
 	la.RunLogAnalysis(ARY_PATH,
 					  DB2InstanceName,
 					  TargetDB, 
 					  DSName,
 					  _credentials,
-					  _credentials.DBUser + ".CAROLV", 
+					  tblFilter, 
+					  tbsFilter,
+					  pgFilter,
 					  AryLogAnalysis.Operation.INSERTS+
 					  AryLogAnalysis.Operation.UPDATES+
 					  AryLogAnalysis.Operation.DELETES, 
@@ -235,12 +259,18 @@ public void LA_CarolV_RE_724() throws DecodingException, UnsupportedEncodingExce
 	String xml = (TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName));
 	xml = String.format(xml, "\""+DBUser+"\"");
     
+	String tblFilter = _credentials.DBUser + ".CAROLV";
+	String tbsFilter = "";
+    String pgFilter = "";
+	
 	la.RunLogAnalysis(ARY_PATH,
 					  DB2InstanceName,
 					  TargetDB, 
 					  DSName,
 					  _credentials,
-					  _credentials.DBUser + ".CAROLV", 
+					  tblFilter, 
+					  tbsFilter,
+					  pgFilter,
 					  AryLogAnalysis.Operation.INSERTS+
 					  AryLogAnalysis.Operation.UPDATES+
 					  AryLogAnalysis.Operation.DELETES, 

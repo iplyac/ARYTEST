@@ -47,6 +47,24 @@ public class ConsoleWriter
     }
 
 
+    public static void print(int line)
+    {
+        out.print(line);
+        out.flush();
+    }
+    
+    public static void print(StringBuffer line)
+    {
+        out.print(line);
+        out.flush();
+    }
+    
+    public static void print(char line)
+    {
+        out.print(line);
+        out.flush();
+    }
+    
     /**
      * Write line.
      */

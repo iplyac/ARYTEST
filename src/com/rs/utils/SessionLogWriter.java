@@ -429,8 +429,6 @@ public class SessionLogWriter extends Thread{
         }
 	}
 
-	
-	
 	private List<SessionStatusStruct> getCommonSessionLog(int sessionLogId){
 		PreparedStatement pStmt = null;
 		ResultSet rs = null;

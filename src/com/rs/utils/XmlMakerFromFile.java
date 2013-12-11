@@ -22,6 +22,8 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
 public class XmlMakerFromFile {
+
+	
 	public static class Settings{
 		
 	@Parameter(names = {"-source", "-s"}, description = "Source of sql", descriptionKey = "Source of sql", required = true)
@@ -37,10 +39,19 @@ public class XmlMakerFromFile {
 	private boolean help;
 	}
 	
+	public static void replaceAll (StringBuffer sqlStatementString, String from, String to)
+	{
+	    int index = sqlStatementString.indexOf(from);
+	    while (index != -1)
+	    {
+	    	sqlStatementString.replace(index, index + from.length(), to);
+	        index += to.length(); // Move to the end of the replacement
+	        index = sqlStatementString.indexOf(from, index);
+	    }
+	}
+	
 	public static void main(String[] args) throws Exception {
 
-		PrintWriter printer = new PrintWriter(new OutputStreamWriter(System.out, System.getProperty("file.encoding")));
-		
 		Settings settings = new Settings();
 		JCommander cmd = new JCommander(settings, args);
 		cmd.setProgramName("XmlMakerFromFile");
@@ -60,6 +71,7 @@ public class XmlMakerFromFile {
 				Document doc = docBuilder.newDocument();
 
 				Element rootElement = doc.createElement("testcasesetup");
+				rootElement.setAttribute("autocommit", "yes");
 				doc.appendChild(rootElement);
 
 				Element sql = doc.createElement("SQL");
@@ -67,28 +79,39 @@ public class XmlMakerFromFile {
 
 				Element sqlStatement;
 				int chrCode, stmt_id = 0;
-				String sqlStatementString = "";
+				StringBuffer sqlStatementString = new StringBuffer();
+				
 				while((chrCode = FileReader.read()) != -1)
 				{
-					if (chrCode != settings.delimeter)
-						sqlStatementString+=(char)chrCode;
+					if (chrCode != settings.delimeter){
+						sqlStatementString.append((char)chrCode);
+					}
 						else
 							if ((chrCode = FileReader.read()) == 10)
-						{	
+						{
+
+							ConsoleWriter.print(sqlStatementString);
+								
 							sqlStatement = doc.createElement("statement");
 							sqlStatement.setAttribute("stmt_id", String.valueOf(stmt_id++));
-							sqlStatement.appendChild(doc.createTextNode(sqlStatementString.replaceAll("\\r|\\n", "")));
-							sqlStatementString = "";
+							
+							if (sqlStatementString.toString().startsWith("reorg") || sqlStatementString.toString().startsWith("rollback"))
+								sqlStatement.setAttribute("call", "yes");
+
+						  sqlStatement.appendChild(doc.createTextNode(sqlStatementString.toString().replaceAll("\\r|\\n", "")));
+
+							sqlStatementString.setLength(0);
 							sql.appendChild(sqlStatement);
 						}else{
-							sqlStatementString+=(char)settings.delimeter+""+(char)chrCode;
+							sqlStatementString.append((char)settings.delimeter).append((char)chrCode);
 						}
+
 				}
 
 				TransformerFactory transformerFactory = TransformerFactory
 						.newInstance();
 				Transformer transformer = transformerFactory.newTransformer();
-				DOMSource source = new DOMSource(doc);
+				DOMSource source = new DOMSource(doc);				
 
 				StreamResult out = new StreamResult(new File(settings.target));
 				transformer.transform(source, out);

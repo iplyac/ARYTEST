@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testcasesetup><SQL><statement stmt_id="0">CREATE DATABASE PARTITION GROUP kiwi ON ALL DBPARTITIONNUMS</statement><statement stmt_id="1">
+create bufferpool peach
+ database partition group kiwi
+ pagesize  32 k
+</statement><statement stmt_id="2">
+CREATE large TABLESPACE mango 
+  in database partition group kiwi
+  pagesize 32 k
+  MANAGED BY automatic storage 
+  bufferpool peach  </statement><statement stmt_id="3">     
+
+CREATE TABLE SetAlterTab
+(
+     IndexKey1   Integer  not null,
+     IndexKey2   Integer  not null,
+     mySmallInt2Integer  smallint  not null,
+     mySmallInt2BigInt  smallint  not null,
+
+     mySmallInt2Decimal  smallint  not null,
+     mySmallInt2Real  smallint  not null,
+     mySmallInt2Double  smallint  not null,
+     mySmallInt2DecFloat16 smallint  not null,
+     mySmallInt2DecFloat34 smallint  not null,
+     myInteger2BigInt  Integer  not null,
+
+     myInteger2Decimal  Integer  not null,
+     myInteger2Double  Integer  not null,
+     myInteger2DecFloat16 Integer  not null,
+     myInteger2DecFloat34 Integer  not null,
+
+     myBigInt2Decimal  BigInt   not null,
+     myBigInt2DecFloat34 BigInt   not null,
+     myReal2Double  Real     not null,
+     myDouble2DecFloat16 Double   not null,
+     myDouble2DecFloat34 Double   not null,
+
+     myDecimal2DecimalA  Decimal(4,2)   not null,
+     myDecimal2DecimalB  Decimal(24,9)  not null,
+
+     myDecimal2DecFloat16 Decimal(10,6)  not null,
+     myDecimal2DecFloat34 Decimal(18,2)  not null,
+     myDecFloat162DecFloat34 DecFloat(16)   not null,
+
+     myCharacter2CharacterA Character(3)   not null,
+     myCharacter2CharacterB Character(34)  not null,
+     myCharacter2CharacterC Character(200) not null,
+
+     myCharacter2VarCharA VarChar(8)   not null,
+     myCharacter2VarCharB VarChar(44)  not null,
+     myCharacter2VarCharC VarChar(404) not null,
+
+     myVarChar2CharacterA  VarChar(9)   not null,
+     myVarChar2CharacterB  VarChar(4)  not null,
+     myVarChar2CharacterC  VarChar(40) not null,
+
+     myVarChar2VarCharA  VarChar(1)   not null,
+     myVarChar2VarCharB  VarChar(24)  not null,
+     myVarChar2VarCharC  VarChar(104) not null,
+
+     myGraphic2GraphicA  Graphic(2)    not null,
+     myGraphic2GraphicB  Graphic(59)   not null,
+     myGraphic2GraphicC  Graphic(100)  not null,
+
+     myGraphic2VarGraphicA Graphic(3)    not null,
+     myGraphic2VarGraphicB Graphic(77)   not null,
+     myGraphic2VarGraphicC Graphic(100)  not null,
+    
+     myVarGraphic2VarGraphicA VarGraphic(4)    not null,
+     myVarGraphic2VarGraphicB VarGraphic(88)   not null,
+     myVarGraphic2VarGraphicC VarGraphic(111)  not null,
+
+     myVarGraphic2GraphicA VarGraphic(4)    not null,
+     myVarGraphic2GraphicB VarGraphic(38)   not null,
+     myVarGraphic2GraphicC VarGraphic(121)  not null,
+
+     myBlob2BlobA  Blob(4)    not null,
+     myBlob2BlobB  Blob(88)   not null,
+     myBlob2BlobC  Blob(111)  not null,
+
+     myClob2ClobA  Clob(5)    not null,
+     myClob2ClobB  Clob(78)   not null,
+     myClob2ClobC  Clob(121)  not null,
+
+     myDBCLob2DBCLobA  DBCLob(5)    not null,
+     myDBCLob2DBCLobB  DBCLob(78)   not null,
+     myDBCLob2DBCLobC  DBCLob(121)  not null
+)
+IN mango
+</statement><statement stmt_id="4">  
+CREATE UNIQUE INDEX Key1Key2D 
+ ON SetAlterTab (IndexKey1, IndexKey2 DeSC)
+</statement><statement stmt_id="5">                           
+CREATE INDEX Key1 
+ ON SetAlterTab ( mySmallInt2Integer Desc )
+</statement><statement stmt_id="6">
+
+
+INSERT INTO  SetAlterTab (
+     IndexKey1  ,
+     IndexKey2 ,
+     mySmallInt2Integer,
+     mySmallInt2BigInt ,
+     mySmallInt2Decimal ,
+     mySmallInt2Real,
+     mySmallInt2Double,
+     mySmallInt2DecFloat16,
+     mySmallInt2DecFloat34,
+     myInteger2BigInt ,
+     myInteger2Decimal ,
+     myInteger2Double,
+     myInteger2DecFloat16,
+     myInteger2DecFloat34,
+     myBigInt2Decimal ,
+     myBigInt2DecFloat34 ,
+     myReal2Double ,
+     myDouble2DecFloat16,
+     myDouble2DecFloat34 ,
+     myDecimal2DecimalA ,
+     myDecimal2DecimalB ,
+     myDecimal2DecFloat16 ,
+     myDecimal2DecFloat34 ,
+     myDecFloat162DecFloat34 ,
+     myCharacter2CharacterA ,
+     myCharacter2CharacterB ,
+     myCharacter2CharacterC ,
+     myCharacter2VarCharA ,
+     myCharacter2VarCharB ,
+     myCharacter2VarCharC ,
+     myVarChar2CharacterA,
+     myVarChar2CharacterB,
+     myVarChar2CharacterC,
+     myVarChar2VarCharA  ,
+     myVarChar2VarCharB  ,
+     myVarChar2VarCharC  ,
+     myGraphic2GraphicA ,
+     myGraphic2GraphicB ,
+     myGraphic2GraphicC ,
+     myGraphic2VarGraphicA ,
+     myGraphic2VarGraphicB ,
+     myGraphic2VarGraphicC ,
+     myVarGraphic2VarGraphicA ,
+     myVarGraphic2VarGraphicB ,
+     myVarGraphic2VarGraphicC ,
+     myVarGraphic2GraphicA ,
+     myVarGraphic2GraphicB ,
+     myVarGraphic2GraphicC ,
+     myBlob2BlobA  ,
+     myBlob2BlobB  ,
+     myBlob2BlobC  ,
+     myClob2ClobA  ,
+     myClob2ClobB  ,
+     myClob2ClobC  ,
+     myDBCLob2DBCLobA  ,
+     myDBCLob2DBCLobB  ,
+     myDBCLob2DBCLobC 
+)
+values
+    (  -3, -330,4,
+ 1, 3, 5, 
+ 7, 9, 11, 
+ 13, 15, 17, 
+ 19, 21, 23, 
+ 25, 
+ 3.3, 4.44444444444, 5.5555555555,
+ 6.6, 4.4,
+ 10.6, 18.2,
+ 3.14,
+ ':Wa', ':Oregon', ':California',
+ 'Delaware', 'Oklahoma', 'North Dakata',
+ 'Texas', 'XXXX', 'Kansas',
+ ')', 'Arizona', 'New Mexico',
+ x'003a', x'003b', x'003c',
+ x'003a', x'003b', x'003c',
+ x'003a', x'003b', x'003c',
+ x'003a', x'003b', x'003c',
+ BLOB('jfA'), BLOB(':&lt;b1mdjfA.P9[-j'),
+   BLOB(':&lt;b1mdjfA.P9[-j'),
+ CLOB(':ash'), CLOB(':Oregon'), CLOB(':California'),
+ DBCLOB(x'003a'), DBCLOB(x'003a'), DBCLOB(x'003a')
+)</statement><statement stmt_id="7">
+Alter table SetAlterTab Alter column mySmallInt2Integer  set data type Integer</statement><statement stmt_id="8">Alter table SetAlterTab Alter column mySmallInt2BigInt set data type BigInt</statement><statement stmt_id="9">Alter table SetAlterTab Alter column mySmallInt2Decimal set data type Decimal(10,2)</statement><statement stmt_id="10">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="11">Alter table SetAlterTab Alter column mySmallInt2Real set data type Real</statement><statement stmt_id="12">Alter table SetAlterTab Alter column mySmallInt2Double set data type Double</statement><statement stmt_id="13">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="14">Alter table SetAlterTab Alter column mySmallInt2DecFloat16 set data type DecFloat(16)</statement><statement stmt_id="15">Alter table SetAlterTab Alter column mySmallInt2DecFloat34 set data type DecFloat(34)</statement><statement stmt_id="16">
+
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="17">Alter table SetAlterTab Alter column myInteger2BigInt set data type BigInt</statement><statement stmt_id="18">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="19">Alter table SetAlterTab Alter column myInteger2Decimal set data type Decimal(20,3)</statement><statement stmt_id="20">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="21">Alter table SetAlterTab Alter column myInteger2DecFloat16 set data type DecFloat(16)</statement><statement stmt_id="22">Alter table SetAlterTab Alter column myInteger2DecFloat34 set data type DecFloat(34)</statement><statement stmt_id="23">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="24">
+Alter table SetAlterTab Alter column myBigInt2Decimal set data type Decimal(23,1)</statement><statement stmt_id="25">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="26">Alter table SetAlterTab Alter column myBigInt2DecFloat34 set data type DecFloat(34)</statement><statement stmt_id="27">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="28">Alter table SetAlterTab Alter column myReal2Double set data type Double</statement><statement stmt_id="29">
+Alter table SetAlterTab Alter column myDouble2DecFloat16 set data type DecFloat(16)</statement><statement stmt_id="30">Alter table SetAlterTab Alter column myDouble2DecFloat34 set data type DecFloat(34)</statement><statement stmt_id="31">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="32">Alter table SetAlterTab Alter column myDecimal2DecimalA set data type Decimal(6,2)</statement><statement stmt_id="33">Alter table SetAlterTab Alter column myDecimal2DecimalB set data type Decimal(27,11)</statement><statement stmt_id="34">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="35">Alter table SetAlterTab Alter column myDecimal2DecFloat16 set data type DecFloat(16)</statement><statement stmt_id="36">Alter table SetAlterTab Alter column myDecimal2DecFloat34 set data type DecFloat(34)</statement><statement stmt_id="37">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="38">Alter table SetAlterTab Alter column myDecFloat162DecFloat34 set data type DecFloat(34)</statement><statement stmt_id="39">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="40">Alter table SetAlterTab Alter column myCharacter2CharacterA set data type Character(34)</statement><statement stmt_id="41">Alter table SetAlterTab Alter column myCharacter2CharacterB set data type Character(37)</statement><statement stmt_id="42">Alter table SetAlterTab Alter column myCharacter2CharacterC set data type Character(201)</statement><statement stmt_id="43">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="44">Alter table SetAlterTab Alter column myCharacter2VarCharA set data type VarChar(20)</statement><statement stmt_id="45">Alter table SetAlterTab Alter column myCharacter2VarCharB set data type VarChar(77)</statement><statement stmt_id="46">Alter table SetAlterTab Alter column myCharacter2VarCharC set data type VarChar(500)</statement><statement stmt_id="47">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="48">Alter table SetAlterTab Alter column myVarChar2CharacterA set data type Character(20)</statement><statement stmt_id="49">Alter table SetAlterTab Alter column myVarChar2CharacterB set data type Character(7)</statement><statement stmt_id="50">Alter table SetAlterTab Alter column myVarChar2CharacterC set data type Character(50)</statement><statement stmt_id="51">
+Alter table SetAlterTab Alter column myVarChar2VarCharA set data type VarChar(20)</statement><statement stmt_id="52">Alter table SetAlterTab Alter column myVarChar2VarCharB set data type VarChar(57)</statement><statement stmt_id="53">Alter table SetAlterTab Alter column myVarChar2VarCharC set data type VarChar(500)</statement><statement stmt_id="54">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="55">Alter table SetAlterTab Alter column myGraphic2GraphicA set data type Graphic(20)</statement><statement stmt_id="56">Alter table SetAlterTab Alter column myGraphic2GraphicB set data type Graphic(67)</statement><statement stmt_id="57">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="58">Alter table SetAlterTab Alter column myGraphic2GraphicC set data type Graphic(105)</statement><statement stmt_id="59">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="60">Alter table SetAlterTab Alter column myGraphic2VarGraphicA set data type VarGraphic(8)</statement><statement stmt_id="61">Alter table SetAlterTab Alter column myGraphic2VarGraphicB set data type VarGraphic(87)</statement><statement stmt_id="62">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="63">Alter table SetAlterTab Alter column myGraphic2VarGraphicC set data type VarGraphic(110)</statement><statement stmt_id="64">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="65">Alter table SetAlterTab Alter column myVarGraphic2VarGraphicA set data type VarGraphic(8)</statement><statement stmt_id="66">Alter table SetAlterTab Alter column myVarGraphic2VarGraphicB set data type VarGraphic(89)</statement><statement stmt_id="67">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="68">Alter table SetAlterTab Alter column myVarGraphic2VarGraphicC set data type VarGraphic(113)</statement><statement stmt_id="69">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="70">Alter table SetAlterTab Alter column myVarGraphic2GraphicA set data type Graphic(6)</statement><statement stmt_id="71">Alter table SetAlterTab Alter column myVarGraphic2GraphicB set data type Graphic(49)</statement><statement stmt_id="72">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="73">Alter table SetAlterTab Alter column myVarGraphic2GraphicC set data type Graphic(127)</statement><statement stmt_id="74">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="75">Alter table SetAlterTab Alter column myBlob2BlobA set data type Blob(8)</statement><statement stmt_id="76">Alter table SetAlterTab Alter column myBlob2BlobB set data type Blob(89)</statement><statement stmt_id="77">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="78">Alter table SetAlterTab Alter column myBlob2BlobC set data type Blob(113)</statement><statement stmt_id="79">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="80">Alter table SetAlterTab Alter column myClob2ClobA set data type Clob(8)</statement><statement stmt_id="81">Alter table SetAlterTab Alter column myClob2ClobB set data type Clob(89)</statement><statement stmt_id="82">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="83">Alter table SetAlterTab Alter column myClob2ClobC set data type Clob(123)</statement><statement stmt_id="84">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="85">Alter table SetAlterTab Alter column myDBClob2DBClobA set data type DBClob(8)</statement><statement stmt_id="86">Alter table SetAlterTab Alter column myDBClob2DBClobB set data type DBClob(89)</statement><statement stmt_id="87">Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="88">Alter table SetAlterTab Alter column myDBClob2DBClobC set data type DBClob(133)</statement><statement stmt_id="89">
+Call Sysproc.admin_cmd ('reorg table setaltertab')</statement><statement stmt_id="90">
+INSERT INTO  SetAlterTab (
+     IndexKey1  ,
+     IndexKey2 ,
+     mySmallInt2Integer,
+     mySmallInt2BigInt ,
+     mySmallInt2Decimal ,
+     mySmallInt2Real,
+     mySmallInt2Double,
+     mySmallInt2DecFloat16,
+     mySmallInt2DecFloat34,
+     myInteger2BigInt ,
+     myInteger2Decimal ,
+     myInteger2Double,
+     myInteger2DecFloat16,
+     myInteger2DecFloat34,
+     myBigInt2Decimal ,
+     myBigInt2DecFloat34 ,
+     myReal2Double ,
+     myDouble2DecFloat16,
+     myDouble2DecFloat34 ,
+     myDecimal2DecimalA ,
+     myDecimal2DecimalB ,
+     myDecimal2DecFloat16 ,
+     myDecimal2DecFloat34 ,
+     myDecFloat162DecFloat34 ,
+     myCharacter2CharacterA ,
+     myCharacter2CharacterB ,
+     myCharacter2CharacterC ,
+     myCharacter2VarCharA ,
+     myCharacter2VarCharB ,
+     myCharacter2VarCharC ,
+     myVarChar2CharacterA,
+     myVarChar2CharacterB,
+     myVarChar2CharacterC,
+     myVarChar2VarCharA  ,
+     myVarChar2VarCharB  ,
+     myVarChar2VarCharC  ,
+     myGraphic2GraphicA ,
+     myGraphic2GraphicB ,
+     myGraphic2GraphicC ,
+     myGraphic2VarGraphicA ,
+     myGraphic2VarGraphicB ,
+     myGraphic2VarGraphicC ,
+     myVarGraphic2VarGraphicA ,
+     myVarGraphic2VarGraphicB ,
+     myVarGraphic2VarGraphicC ,
+     myVarGraphic2GraphicA ,
+     myVarGraphic2GraphicB ,
+     myVarGraphic2GraphicC ,
+     myBlob2BlobA  ,
+     myBlob2BlobB  ,
+     myBlob2BlobC  ,
+     myClob2ClobA  ,
+     myClob2ClobB  ,
+     myClob2ClobC  ,
+     myDBCLob2DBCLobA  ,
+     myDBCLob2DBCLobB  ,
+     myDBCLob2DBCLobC 
+)
+values
+    (  333, 333,3,
+ 8, 8, 4, 
+ 77, 1, 1, 
+ 3, 5, 7, 
+ 29, 22, 43, 
+ 28, 
+ 3.3, 4.44444444444, 5.5555555555,
+ 3.6, 3.4,
+ 10.8, 48.2,
+ 66.4,
+ 'abc', 'defghij', 'klmnopqrstu',
+ 'Alabama', 'Georgia', 'South Dakota',
+ 'Nw Me', 'zzzz', 'Nevada',
+ ')', 'Colorad', 'Idaho     ',
+ x'004a', x'002b', x'001c',
+ x'004a', x'002b', x'002c',
+ x'004a', x'002b', x'001c',
+ x'004a', x'002b', x'001c',
+ BLOB('xxx'), BLOB('Soon to be done'),
+   BLOB(':&lt;b1mdjfA.P9[-j'),
+ CLOB(':ash'), CLOB(':Oregon'), CLOB(':California'),
+ DBCLOB(x'003a'), DBCLOB(x'003a'), DBCLOB(x'003a')
+)</statement></SQL></testcasesetup>

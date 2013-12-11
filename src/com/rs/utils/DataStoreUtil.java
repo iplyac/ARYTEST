@@ -57,6 +57,12 @@ public class DataStoreUtil {
     private static final String CTIME_QUERY =
         "SELECT REPLACE(REPLACE(REPLACE(VARCHAR_FORMAT(CTIME, 'YYYY-MM-DD HH24:MI:SS'), '-', ''), ':', ''), ' ', '') FROM SYSIBM.SYSTABLES" +
         " WHERE (CREATOR = 'SYSIBM' AND NAME = 'SYSTABLES') FETCH FIRST ROW ONLY FOR READ ONLY WITH UR";
+    
+    /**
+     * This query is used for receiving SLR status
+     */
+    private static final String SLR_EXIST_PROCEDURE = 
+    		"SELECT SYSTOOLS.ARY_VR_STATUS( ? ) FROM SYSIBM.SYSDUMMY1";
 
     /**
      * This query for obtaining catalog partition.
@@ -102,7 +108,7 @@ public class DataStoreUtil {
 			ds.setDriverType(4);
 
 			conn = ds.getConnection(); 
-			conn.setAutoCommit(true);
+			conn.setAutoCommit(false);
 		}
 		catch(SQLException ex)                                                    
 	    {
@@ -197,7 +203,7 @@ public class DataStoreUtil {
 		try{
 			if ( (did = getDatabaseID(TargetDB))>0 )
 			{
-				pStmt = dsConnection.prepareStatement("SELECT SYSTOOLS.ARY_VR_STATUS( ? ) FROM SYSIBM.SYSDUMMY1");
+				pStmt = dsConnection.prepareStatement(SLR_EXIST_PROCEDURE);
 				pStmt.setInt(1, did);
 				rs = pStmt.executeQuery();
 				rs.next();

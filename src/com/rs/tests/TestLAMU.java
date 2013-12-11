@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.ws.commons.util.Base64.DecodingException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -36,9 +37,6 @@ public class TestLAMU extends ATestCases {
 			PathToSQL = Paths.get(PathToSQL.toString(), "mu"); 
 			
 			withLob = true;
-			
-			DataStoreUtil.dbConnection = DataStoreUtil.connect(HostName, DB2InstancePort, TargetDB, DBUser, DBPassword);
-			DataStoreUtil.dsConnection = DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
 			
 			String [] xmlFiles = {
 									"prepareMU.xml",
@@ -74,7 +72,8 @@ public static void CompleteTest(){
 	DataStoreUtil.close(DataStoreUtil.getDbConnection());
 	DataStoreUtil.close(DataStoreUtil.getDsConnection());
 }
-	
+
+@Ignore
 @Test
 	public void LA_MU_RE_915() throws DecodingException, UnsupportedEncodingException, Exception
 	{
@@ -93,14 +92,20 @@ public static void CompleteTest(){
 	xml = String.format(xml, "\""+DBUser+"\"");
 	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
 	
+	String tblFilter = _credentials.DBUser +".MU "+
+					  _credentials.DBUser +".MUDCC "+
+					  _credentials.DBUser +".MUDCCB";
+	String tbsFilter = "";
+    String pgFilter = "";
+	
 	la.RunLogAnalysis(ARY_PATH,
 					  DB2InstanceName,
 					  TargetDB, 
 					  DSName,
 					  _credentials,
-					  _credentials.DBUser +".MU "+
-					  _credentials.DBUser +".MUDCC "+
-					  _credentials.DBUser +".MUDCCB", 
+					  tblFilter,
+					  tbsFilter,
+					  pgFilter,
 					  AryLogAnalysis.Operation.INSERTS+
 					  AryLogAnalysis.Operation.UPDATES+
 					  AryLogAnalysis.Operation.DELETES, 

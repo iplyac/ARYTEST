@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testcasesetup><SQL><statement stmt_id="0">
+CREATE  REGULAR  TABLESPACE Lime PAGESIZE 4 K
+        MANAGED BY DATABASE
+        USING ( FILE 'DB2\Lime' 5120 )
+        EXTENTSIZE 16 OVERHEAD 12.5
+        PREFETCHSIZE 16
+        TRANSFERRATE 0.13
+        BUFFERPOOL "IBMDEFAULTBP"
+        DROPPED TABLE RECOVERY ON</statement><statement stmt_id="1">	COMMENT ON TABLESPACE Lime IS 'Tablespace for general use.'</statement><statement stmt_id="2">
+
+
+CREATE LARGE TABLESPACE Apple MANAGED BY DATABASE 
+	USING (FILE 'Apple0' 5000, FILE 'Apple1' 5000)</statement><statement stmt_id="3">
+CREATE TABLESPACE Grape MANAGED BY DATABASE 
+	USING (FILE 'Grape0' 5000, FILE 'Grape1' 5000)</statement></SQL></testcasesetup>

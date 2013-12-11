@@ -38,15 +38,15 @@ public class TestLAPart_ForKey extends ATestCases {
 									"mod2Tab1.xml"
 								 };
 			
-			/*TestCaseSetUp.dropDB(TargetDB);
+			TestCaseSetUp.dropDB(TargetDB);
 			TestCaseSetUp.createDB(TargetDB);
 			TestCaseSetUp.updateLogarchmeth1(TargetDB, LOGPATH);
-			TestCaseSetUp.makeOfflineBackup(TargetDB, BACKUPPATH);*/
+			TestCaseSetUp.makeOfflineBackup(TargetDB, BACKUPPATH);
 			
 			DataStoreUtil.dbConnection = DataStoreUtil.connect(HostName, DB2InstancePort, TargetDB, DBUser, DBPassword);
 			DataStoreUtil.dsConnection = DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
 			
-//			TestCaseSetUp.runSQL(xmlFiles, withLob);
+			TestCaseSetUp.runSQL(xmlFiles, withLob);
 
 			slr.RunSLR(ARY_PATH, DB2InstanceName, TargetDB, DSName, _credentials, DataStoreUtil.isSlrExist(TargetDB) ? ArySLR.SLROperation.REBUILD : ArySLR.SLROperation.CREATE);
 		}
@@ -66,13 +66,19 @@ public void LA_Part_ForKey_RE_1023() throws DecodingException, UnsupportedEncodi
 	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
 	
 	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-		
+	
+	String tblFilter = "ARYMP01.'Hamster'";
+	String tbsFilter = "";
+    String pgFilter = "";
+	
 	la.RunLogAnalysis(ARY_PATH,
 					  DB2InstanceName,
 					  TargetDB, 
 					  DSName,
 					  _credentials,
-					  "ARYMP01.'Hamster'", 
+					  tblFilter,
+					  tbsFilter,
+					  pgFilter,
 					  AryLogAnalysis.Operation.INSERTS+
 					  AryLogAnalysis.Operation.UPDATES+
 					  AryLogAnalysis.Operation.DELETES, 

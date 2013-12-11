@@ -51,6 +51,9 @@ public class AryLogAnalysis extends ArySession{
 	public static final String OPT_AUTHLIST = "authlist";
 	public static final String OPT_APPID = "appid";
 	
+	public static final String PERMANENT_TABLE_FILTER = " !'ARY'.";
+	public static final String PERMANENT_TBS_FILTER = " NOT LIKE 'ARY%' NOT LIKE 'SYS%'";
+	
 	
 	private String tblFilter;
 	private String pgFilter;
@@ -115,7 +118,7 @@ public class AryLogAnalysis extends ArySession{
 	 * @param TargetDB
 	 * @param DSName
 	 * @param _credentials
-	 * @param ObjectsSet
+	 * @param TableList
 	 * @param Operations
 	 * @param SQLDirection
 	 * @param LAMode
@@ -125,22 +128,24 @@ public class AryLogAnalysis extends ArySession{
 	 */
 	public String makeLogAnalysisCommand(String ARY_PATH,
 			String DB2InstanceName, String TargetDB, String DSName,
-			AryCredentials _credentials, String ObjectsSet,
+			AryCredentials _credentials, String tblFilter,String tbsFilter,String pgFilter,
 			String Operations, String SQLDirection, String LAMode,
 			String LAReportType, String LobIgnore) {
 		
-		tblFilter = ObjectsSet;
+		this.tblFilter = tblFilter;
+		this.tbsFilter = tbsFilter;
+		this.pgFilter = pgFilter;
 		
 		opts = new ArrayList<AryOpt>();
 		
-        this.addAryOption(AryLogAnalysis.OPT_PGROUPS, pgFilter);
-        this.addAryOption(AryLogAnalysis.OPT_TABLES, tblFilter);
+        this.addAryOption(AryLogAnalysis.OPT_PGROUPS, this.pgFilter);
+        this.addAryOption(AryLogAnalysis.OPT_TABLES, this.tblFilter + PERMANENT_TABLE_FILTER);
+        this.addAryOption(AryLogAnalysis.OPT_TBSPACES, this.tbsFilter + PERMANENT_TBS_FILTER);
         this.addAryOption(AryLogAnalysis.OPT_DB_LOGLOC, logLoc);
         this.addAryOption(AryLogAnalysis.OPT_DB_BACKUPLOC, backupLoc);
         this.addAryOption(AryLogAnalysis.OPT_APPID, appID);
         this.addAryOption(AryLogAnalysis.OPT_APPNAME, appName);
         this.addAryOption(AryLogAnalysis.OPT_AUTHLIST, authList);
-        this.addAryOption(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
         
         boolean isMRT = (LAMode.equals(Mode.MRT)) ? true : false;
 
@@ -172,7 +177,7 @@ public class AryLogAnalysis extends ArySession{
 	 *  @param TargetDB Target database name
 	 *  @param DSName Name of data store database name
 	 *  @param _credentials Credentials for datastore and database users
-	 *  @param ObjectsSet Objects for LA
+	 *  @param TableList Tables for LA
 	 *  @param Operations Operations for capturing (use Operation class)
 	 *  @param SQLDirection Redo sql or Undo sql (use <code>SQLDirection</code> class)
 	 *  @param LAMode log analysis mode (use Mode class)
@@ -182,7 +187,7 @@ public class AryLogAnalysis extends ArySession{
 	
 	public void RunLogAnalysis(String ARY_PATH, String DB2InstanceName,
 			String TargetDB, String DSName, AryCredentials _credentials,
-			String ObjectsSet, String Operations, String SQLDirection,
+			String tblFilter, String tbsFilter, String pgFilter, String Operations, String SQLDirection,
 			String LAMode, String LAReportType, String LobIgnore)
 	{
 		runprocess(makeLogAnalysisCommand(ARY_PATH, 
@@ -190,7 +195,9 @@ public class AryLogAnalysis extends ArySession{
 											  TargetDB,
 											  DSName,
 											  _credentials,
-											  ObjectsSet,
+											  tblFilter,
+											  tbsFilter,
+											  pgFilter,
 											  Operations,
 											  SQLDirection,
 											  LAMode,
