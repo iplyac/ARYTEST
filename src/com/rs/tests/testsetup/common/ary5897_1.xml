@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testcasesetup autocommit="yes"><SQL><statement stmt_id="0">create table tab1(col1 int,col2 char(5))</statement></SQL></testcasesetup>

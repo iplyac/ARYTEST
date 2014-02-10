@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testcasesetup autocommit="yes"><SQL><statement stmt_id="0">delete from WITHMDC1_old where "ID" = 5</statement><statement stmt_id="1">insert INTO WITHMDC1 VALUES (DEFAULT, DEFAULT, '((6))', 987.00)</statement></SQL></testcasesetup>
