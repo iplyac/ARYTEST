@@ -52,7 +52,7 @@ public class TestLASetAlter extends ATestCases{
 		}
 
 	@Test
-	public void LA_SetAlter_RE_899() throws DecodingException, UnsupportedEncodingException, Exception{
+	public void LA_SetAlter_RE_903() throws DecodingException, UnsupportedEncodingException, Exception{
 		
 		TEST_CASE_EXTERNAL_ID = 903;
 		TEST_CASE_ID = 832154;

@@ -33,7 +33,8 @@ public class TestLAGalileo extends ATestCases {
 		
 		withLob = false;
 		
-		String [] xmlFiles = {"RE-201.xml"};
+		String [] xmlFiles = {"RE-201.xml",
+							  "rename.xml"};
 		
 		TestCaseSetUp.dropDB(TargetDB);
 		TestCaseSetUp.createDB(TargetDB);
@@ -94,7 +95,7 @@ public class TestLAGalileo extends ATestCases {
 	    assertTrue(expectedResultsList.isEmpty());
 	}
 	
-	@Ignore
+
 	@Test
 	public void LA_Galileo_RE_203()throws DecodingException, UnsupportedEncodingException, Exception{
 		
@@ -139,14 +140,14 @@ public class TestLAGalileo extends ATestCases {
 	    assertTrue(expectedResultsList.isEmpty());
 	}
 	
-	@Ignore
+
 	@Test
 	public void LA_Galileo_RE_204()throws DecodingException, UnsupportedEncodingException, Exception{
 		
 		TEST_CASE_EXTERNAL_ID = 204;
 		TEST_CASE_ID = 825919;
-		TEST_CASE_STEP_NUM = 4;
-		TEST_CASE_VERSION = 2;
+		TEST_CASE_STEP_NUM = 5;
+		TEST_CASE_VERSION = 4;
 		
 		TestLinkUtil.connect( testlinkURL, testlinkKey);
 		
@@ -182,5 +183,50 @@ public class TestLAGalileo extends ATestCases {
 
 	    expectedResultsList.removeAll(obtainedResultsList);
 	    assertTrue(expectedResultsList.isEmpty());
+	}
+	
+@Ignore
+	@Test
+	public void LA_Galileo_RE_240()throws DecodingException, UnsupportedEncodingException, Exception{
+		
+		/*TEST_CASE_EXTERNAL_ID = 240;
+		TEST_CASE_ID = 825919;
+		TEST_CASE_STEP_NUM = 5;
+		TEST_CASE_VERSION = 4;
+		
+		TestLinkUtil.connect( testlinkURL, testlinkKey);
+		
+		String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+		String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+		
+		String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
+		xml = String.format(xml, "\""+DBUser+"\"");*/
+		
+		String tblFilter = "";
+		String tbsFilter = "NewLime";
+
+		params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+		params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
+		
+		la.RunLogAnalysis(
+						  DB2InstanceName,
+						  TargetDB, 
+						  DSName,
+						  _credentials,
+						  params,
+						  AryLogAnalysis.Operation.INSERTS+
+						  AryLogAnalysis.Operation.UPDATES+
+						  AryLogAnalysis.Operation.DELETES, 
+						  AryLogAnalysis.SQLDirection.REDO,
+						  AryLogAnalysis.Mode.SLR,
+						  AryLogAnalysis.ReportType.FULL,
+						  AryLogAnalysis.LobIgnore.CAPTURE,
+						  AryLogAnalysis.Transactions.COMMITTED);
+		
+		/*List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
+		List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+
+	    expectedResultsList.removeAll(obtainedResultsList);
+	    assertTrue(expectedResultsList.isEmpty());*/
 	}
 }
