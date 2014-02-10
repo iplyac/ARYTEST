@@ -5,9 +5,12 @@ import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ws.commons.util.Base64.DecodingException;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -50,8 +53,8 @@ public class TestLAPart_ForKey extends ATestCases {
 
 			slr.RunSLR(ARY_PATH, DB2InstanceName, TargetDB, DSName, _credentials, DataStoreUtil.isSlrExist(TargetDB) ? ArySLR.SLROperation.REBUILD : ArySLR.SLROperation.CREATE);
 		}
-	
-@Test
+
+	@Test
 public void LA_Part_ForKey_RE_1023() throws DecodingException, UnsupportedEncodingException, Exception{
 	
 	TEST_CASE_ID = 832514;
@@ -69,23 +72,24 @@ public void LA_Part_ForKey_RE_1023() throws DecodingException, UnsupportedEncodi
 	
 	String tblFilter = "ARYMP01.'Hamster'";
 	String tbsFilter = "";
-    String pgFilter = "";
+
+	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
 	
-	la.RunLogAnalysis(ARY_PATH,
+	la.RunLogAnalysis(
 					  DB2InstanceName,
 					  TargetDB, 
 					  DSName,
 					  _credentials,
-					  tblFilter,
-					  tbsFilter,
-					  pgFilter,
+					  params,
 					  AryLogAnalysis.Operation.INSERTS+
 					  AryLogAnalysis.Operation.UPDATES+
 					  AryLogAnalysis.Operation.DELETES, 
 					  AryLogAnalysis.SQLDirection.REDO,
 					  AryLogAnalysis.Mode.SLR,
 					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.CAPTURE);
+					  AryLogAnalysis.LobIgnore.CAPTURE,
+					  AryLogAnalysis.Transactions.COMMITTED);
 	
 	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
 	

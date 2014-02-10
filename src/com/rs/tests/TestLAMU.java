@@ -7,10 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ws.commons.util.Base64.DecodingException;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -66,14 +68,8 @@ public class TestLAMU extends ATestCases {
 
 			slr.RunSLR(ARY_PATH, DB2InstanceName, TargetDB, DSName, _credentials, DataStoreUtil.isSlrExist(TargetDB) ? ArySLR.SLROperation.REBUILD : ArySLR.SLROperation.CREATE);
 		}
-	
-@AfterClass
-public static void CompleteTest(){
-	DataStoreUtil.close(DataStoreUtil.getDbConnection());
-	DataStoreUtil.close(DataStoreUtil.getDsConnection());
-}
 
-@Ignore
+	@Ignore
 @Test
 	public void LA_MU_RE_915() throws DecodingException, UnsupportedEncodingException, Exception
 	{
@@ -96,23 +92,24 @@ public static void CompleteTest(){
 					  _credentials.DBUser +".MUDCC "+
 					  _credentials.DBUser +".MUDCCB";
 	String tbsFilter = "";
-    String pgFilter = "";
+
+	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
 	
-	la.RunLogAnalysis(ARY_PATH,
+	la.RunLogAnalysis(
 					  DB2InstanceName,
 					  TargetDB, 
 					  DSName,
 					  _credentials,
-					  tblFilter,
-					  tbsFilter,
-					  pgFilter,
+					  params,
 					  AryLogAnalysis.Operation.INSERTS+
 					  AryLogAnalysis.Operation.UPDATES+
 					  AryLogAnalysis.Operation.DELETES, 
 					  AryLogAnalysis.SQLDirection.REDO,
 					  AryLogAnalysis.Mode.SLR,
 					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE );
+					  AryLogAnalysis.LobIgnore.IGNORE,
+					  AryLogAnalysis.Transactions.COMMITTED);
 	
 	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
 	

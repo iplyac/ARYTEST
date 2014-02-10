@@ -6,7 +6,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -15,6 +19,7 @@ import com.rs.session.AryLogAnalysis;
 import com.rs.session.ArySLR;
 import com.rs.utils.AryCredentials;
 import com.rs.utils.ConsoleWriter;
+import com.rs.utils.DataStoreUtil;
 
 import br.eti.kinoshita.testlinkjavaapi.model.TestSuite;
 
@@ -101,6 +106,8 @@ public abstract class ATestCases extends TestSuite {
 		}
 	}
 	
+	public static Map<String, String> params = new HashMap<String, String>();
+	
 	/**
 	 * Internal test case id
 	 */
@@ -142,7 +149,25 @@ public ATestCases() {
 	}
 
 
-@Before
-	public void setUp(){}
+@AfterClass
+public static void CompleteTest(){
+	ConsoleWriter.println("Complete tests");
+	try{
+	DataStoreUtil.getDsConnection().commit();
+	DataStoreUtil.getDbConnection().commit();
+	}catch (SQLException ex){
+		ex.printStackTrace();
+	}finally{
+	DataStoreUtil.close(DataStoreUtil.getDbConnection());
+	DataStoreUtil.close(DataStoreUtil.getDsConnection());
+	}
+}
 
+	@Before
+	public void setUp() {
+		/*
+		 * clear params before every test
+		 */
+		params.clear();
+	}
 }

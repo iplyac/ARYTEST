@@ -1,15 +1,13 @@
 package com.rs.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Paths;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ws.commons.util.Base64.DecodingException;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -23,8 +21,8 @@ import com.rs.utils.TestCaseSetUp;
 import com.rs.utils.TestLinkUtil;
 import com.rs.utils.XmlParser;
 
-public class TestLAWildCard extends ATestCases {
-	
+public class TestLACommon extends ATestCases {
+
 	@BeforeClass	
 	public static void setUpBeforeClass() throws FileNotFoundException   
 		{
@@ -33,18 +31,11 @@ public class TestLAWildCard extends ATestCases {
 			_credentials.DBUser = DBUser;
 			_credentials.DBPassword = DBPassword;
 
-			PathToSQL = Paths.get(PathToSQL.toString(), "wildcard"); 
+			PathToSQL = Paths.get(PathToSQL.toString(), "common"); 
 			
 			withLob = false;
 			
-			String [] xmlFiles = {
-									"createWCs.xml",
-									"sqlV95.xml",
-									"modWC3.xml",
-									"modWC4.xml",
-									"modWC4V8.xml",
-									"modWC6.xml"
-								 };
+			String [] xmlFiles = {"ary5897_1.xml"};
 			
 			TestCaseSetUp.dropDB(TargetDB);
 			TestCaseSetUp.createDB(TargetDB);
@@ -55,23 +46,297 @@ public class TestLAWildCard extends ATestCases {
 			DataStoreUtil.dsConnection = DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
 			
 			TestCaseSetUp.runSQL(xmlFiles, withLob);
+			DataStoreUtil.close(DataStoreUtil.dbConnection);
+			
+			DataStoreUtil.dbConnection = DataStoreUtil.connect(HostName, DB2InstancePort, TargetDB, DBUser, DBPassword);
+			
+			xmlFiles = new String[21];
+			
+			xmlFiles[0] = "createX.xml";
+			xmlFiles[1] = "modX2.xml";
+			xmlFiles[2] = "modX4.xml";
+			xmlFiles[3] = "modX4LA.xml";
+			xmlFiles[4] = "modX6LA.xml";
+			xmlFiles[5] = "createTS.xml";
+			xmlFiles[6] = "createTables1.xml";
+			xmlFiles[7] = "createTables2.xml";
+			xmlFiles[8] = "createTables3.xml";
+			xmlFiles[9] = "createTables5.xml";
+			xmlFiles[10] = "alter.xml";
+			xmlFiles[11] = "insert1.xml";
+			xmlFiles[12] = "insert2.xml";
+			xmlFiles[13] = "insert31.xml";
+			xmlFiles[14] = "insert51.xml";
+			xmlFiles[15] = "random_index.xml";
+			xmlFiles[16] = "hash.xml";
+			xmlFiles[17] = "ary5897_2.xml";
+			xmlFiles[18] = "re-1024.xml";
+			xmlFiles[19] = "re-992.xml";
+			xmlFiles[20] = "re-225.xml";
+			
+			TestCaseSetUp.runSQL(xmlFiles, withLob);
 
 			slr.RunSLR(ARY_PATH, DB2InstanceName, TargetDB, DSName, _credentials, DataStoreUtil.isSlrExist(TargetDB) ? ArySLR.SLROperation.REBUILD : ArySLR.SLROperation.CREATE);
+		
+			
 		}
+	
+
+	@Test
+	public void LA_Common_RE_907()throws DecodingException, UnsupportedEncodingException, Exception{
+		
+		TEST_CASE_EXTERNAL_ID = 907;
+		TEST_CASE_ID = 832166;
+		TEST_CASE_STEP_NUM = 7;
+		TEST_CASE_VERSION = 1;
+		
+		TestLinkUtil.connect( testlinkURL, testlinkKey);
+		
+		String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+		String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+		
+		String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
+		xml = String.format(xml, "\""+DBUser+"\"");
+		
+		String tblFilter = "'DADLANI9'.";
+		String tbsFilter = "";
+
+		params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+		params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
+		
+		la.RunLogAnalysis(
+						  DB2InstanceName,
+						  TargetDB, 
+						  DSName,
+						  _credentials,
+						  params,
+						  AryLogAnalysis.Operation.UPDATES, 
+						  AryLogAnalysis.SQLDirection.REDO,
+						  AryLogAnalysis.Mode.SLR,
+						  AryLogAnalysis.ReportType.FULL,
+						  AryLogAnalysis.LobIgnore.IGNORE,
+						  AryLogAnalysis.Transactions.COMMITTED);
+		
+		DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
+		
+		List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
+		List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+
+	    expectedResultsList.removeAll(obtainedResultsList);
+	    assertTrue(expectedResultsList.isEmpty());
+	}
+	
+
+
+@Test
+public void LA_Common_RE_170()throws DecodingException, UnsupportedEncodingException, Exception{
+
+	TEST_CASE_EXTERNAL_ID = 170;
+	TEST_CASE_ID = 825817;
+	TEST_CASE_STEP_NUM = 4;
+	TEST_CASE_VERSION = 3;
+	
+	TestLinkUtil.connect( testlinkURL, testlinkKey);
+	
+	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	
+	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
+	xml = String.format(xml, "\""+DBUser+"\"");
+	
+	String tblFilter = "LIKE '"+_credentials.DBUser+"'.'T%'";
+	String tbsFilter = "";
+
+	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
+	
+	la.RunLogAnalysis(
+					  DB2InstanceName,
+					  TargetDB, 
+					  DSName,
+					  _credentials,
+					  params,
+					  AryLogAnalysis.Operation.INSERTS+
+					  AryLogAnalysis.Operation.UPDATES+
+					  AryLogAnalysis.Operation.DELETES, 
+					  AryLogAnalysis.SQLDirection.REDO,
+					  AryLogAnalysis.Mode.SLR,
+					  AryLogAnalysis.ReportType.FULL,
+					  AryLogAnalysis.LobIgnore.CAPTURE,
+					  AryLogAnalysis.Transactions.COMMITTED);
+	
+	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
+	
+	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
+	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+
+    expectedResultsList.removeAll(obtainedResultsList);
+    assertTrue(expectedResultsList.isEmpty());
+	
+	}
+
+
+@Test
+public void LA_Common_RE_192()throws DecodingException, UnsupportedEncodingException, Exception{
+	
+	TEST_CASE_EXTERNAL_ID = 192;
+	TEST_CASE_ID = 825883;
+	TEST_CASE_STEP_NUM = 5;
+	TEST_CASE_VERSION = 2;
+	
+	TestLinkUtil.connect( testlinkURL, testlinkKey);
+	
+	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	
+	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
+	xml = String.format(xml, "\""+DBUser+"\"");
+	
+	String tblFilter = _credentials.DBUser+".T1";
+	String tbsFilter = "";
+
+	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
+	
+	la.RunLogAnalysis(
+					  DB2InstanceName,
+					  TargetDB, 
+					  DSName,
+					  _credentials,
+					  params,
+					  AryLogAnalysis.Operation.INSERTS+
+					  AryLogAnalysis.Operation.UPDATES+
+					  AryLogAnalysis.Operation.DELETES, 
+					  AryLogAnalysis.SQLDirection.REDO,
+					  AryLogAnalysis.Mode.SLR,
+					  AryLogAnalysis.ReportType.FULL,
+					  AryLogAnalysis.LobIgnore.IGNORE,
+					  AryLogAnalysis.Transactions.COMMITTED);
+	
+	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
+	
+	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
+	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+
+    expectedResultsList.removeAll(obtainedResultsList);
+    assertTrue(expectedResultsList.isEmpty());
+}
+
+
+@Test
+public void LA_Common_RE_1002()throws DecodingException, UnsupportedEncodingException, Exception{
+	
+	TEST_CASE_EXTERNAL_ID = 1002;
+	TEST_CASE_ID = 832451;
+	TEST_CASE_STEP_NUM = 2;
+	TEST_CASE_VERSION = 2;
+	
+	TestLinkUtil.connect( testlinkURL, testlinkKey);
+	
+	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	
+	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
+	xml = String.format(xml, "\""+DBUser+"\"");
+	
+	String tblFilter = _credentials.DBUser+".MYDATA";
+	String tbsFilter = "";
+
+	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
+	
+	la.RunLogAnalysis(
+					  DB2InstanceName,
+					  TargetDB, 
+					  DSName,
+					  _credentials,
+					  params,
+					  AryLogAnalysis.Operation.INSERTS+
+					  AryLogAnalysis.Operation.UPDATES+
+					  AryLogAnalysis.Operation.DELETES, 
+					  AryLogAnalysis.SQLDirection.REDO,
+					  AryLogAnalysis.Mode.SLR,
+					  AryLogAnalysis.ReportType.FULL,
+					  AryLogAnalysis.LobIgnore.IGNORE,
+					  AryLogAnalysis.Transactions.COMMITTED);
+	
+	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
+	
+	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
+	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+
+    expectedResultsList.removeAll(obtainedResultsList);
+    assertTrue(expectedResultsList.isEmpty());
+}
+
+
+@Test
+public void LA_Common_RE_1020()throws DecodingException, UnsupportedEncodingException, Exception{
+	
+	TEST_CASE_EXTERNAL_ID = 1020;
+	TEST_CASE_ID = 832505;
+	TEST_CASE_STEP_NUM = 3;
+	TEST_CASE_VERSION = 1;
+	
+	TestLinkUtil.connect( testlinkURL, testlinkKey);
+	
+	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	
+	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
+	xml = String.format(xml, "\""+DBUser+"\"");
+	
+	String tblFilter = _credentials.DBUser+".TAB1";
+	String tbsFilter = "";
+
+	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
+	
+	la.RunLogAnalysis(
+					  DB2InstanceName,
+					  TargetDB, 
+					  DSName,
+					  _credentials,
+					  params,
+					  AryLogAnalysis.Operation.INSERTS+
+					  AryLogAnalysis.Operation.UPDATES+
+					  AryLogAnalysis.Operation.DELETES, 
+					  AryLogAnalysis.SQLDirection.REDO,
+					  AryLogAnalysis.Mode.SLR,
+					  AryLogAnalysis.ReportType.FULL,
+					  AryLogAnalysis.LobIgnore.CAPTURE,
+					  AryLogAnalysis.Transactions.COMMITTED);
+	
+	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
+	
+	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
+	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+
+    expectedResultsList.removeAll(obtainedResultsList);
+    assertTrue(expectedResultsList.isEmpty());
+    
+    TEST_CASE_STEP_NUM = 3;
+    
+	sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	
+	xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
+	xml = String.format(xml, "\""+DBUser+"\"");
+
+    expectedResultsList = XmlParser.getResultsStringList(xml);
+    obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+
+    expectedResultsList.removeAll(obtainedResultsList);
+    assertTrue(expectedResultsList.isEmpty());
+}
 
 @Ignore
 @Test
-public void LA_WildCard_RE_905(){
+public void LA_Common_RE_1024()throws DecodingException, UnsupportedEncodingException, Exception{
 	
-}
-
-
-@Test
-public void LA_WildCard_RE_689() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	TEST_CASE_EXTERNAL_ID = 689;
-	TEST_CASE_ID = 831512;
-	TEST_CASE_STEP_NUM = 7;
+	TEST_CASE_EXTERNAL_ID = 1024;
+	TEST_CASE_ID = 832517;
+	TEST_CASE_STEP_NUM = 3;
 	TEST_CASE_VERSION = 1;
 	
 	TestLinkUtil.connect( testlinkURL, testlinkKey);
@@ -81,90 +346,75 @@ public void LA_WildCard_RE_689() throws DecodingException, UnsupportedEncodingEx
 	
 	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
 	xml = String.format(xml, "\""+DBUser+"\"");
+	
+	String tblFilter = "'DB2ADMN'.";
+	String tbsFilter = "";
+
+	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
+	
+	la.RunLogAnalysis(
+					  DB2InstanceName,
+					  TargetDB, 
+					  DSName,
+					  _credentials,
+					  params,
+					  AryLogAnalysis.Operation.INSERTS+
+					  AryLogAnalysis.Operation.UPDATES+
+					  AryLogAnalysis.Operation.DELETES, 
+					  AryLogAnalysis.SQLDirection.REDO,
+					  AryLogAnalysis.Mode.SLR,
+					  AryLogAnalysis.ReportType.FULL,
+					  AryLogAnalysis.LobIgnore.CAPTURE,
+					  AryLogAnalysis.Transactions.COMMITTED+
+					  AryLogAnalysis.Transactions.ROLLEDBACK+
+					  AryLogAnalysis.Transactions.UNCOMMITTED);
+	
+	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
+	
+	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
+	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+
+    expectedResultsList.removeAll(obtainedResultsList);
+    assertTrue(expectedResultsList.isEmpty());
     
-	String tblFilter = "";
-	String tbsFilter = "ARYMPTESTTS ARYMPTESTXMLTS FAN GRAPE arympts";
-
-	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-	
-	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
-	
-	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
-
-    expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());
-}
-
-@Test
-public void LA_WildCard_RE_690() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	TEST_CASE_EXTERNAL_ID = 690;
-	TEST_CASE_ID = 831515;
-	TEST_CASE_STEP_NUM = 7;
-	TEST_CASE_VERSION = 1;
-	
-	TestLinkUtil.connect( testlinkURL, testlinkKey);
-	
-	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	
-	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-	xml = String.format(xml, "\""+DBUser+"\"");
-	
-	String tblFilter = "";
-	String tbsFilter = "";
-    String pgFilter = "MYPARTITIONGROUP";
+    /*TEST_CASE_STEP_NUM = 4;
     
-    params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-	params.put(AryLogAnalysis.OPT_PGROUPS, pgFilter);
+	sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+	FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
 	
+	xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
+	xml = String.format(xml, "\""+DBUser+"\"");
+
 	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
+			  DB2InstanceName,
+			  TargetDB, 
+			  DSName,
+			  _credentials,
+			  params,
+			  AryLogAnalysis.Operation.INSERTS+
+			  AryLogAnalysis.Operation.UPDATES+
+			  AryLogAnalysis.Operation.DELETES, 
+			  AryLogAnalysis.SQLDirection.REDO,
+			  AryLogAnalysis.Mode.MRT,
+			  AryLogAnalysis.ReportType.FULL,
+			  AryLogAnalysis.LobIgnore.CAPTURE,
+			  AryLogAnalysis.Transactions.COMMITTED+
+			  AryLogAnalysis.Transactions.ROLLEDBACK+
+			  AryLogAnalysis.Transactions.UNCOMMITTED);
 	
-	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+    expectedResultsList = XmlParser.getResultsStringList(xml);
+    obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
 
     expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());
+    assertTrue(expectedResultsList.isEmpty());*/
 }
 
 @Test
-public void LA_WildCard_RE_701() throws DecodingException, UnsupportedEncodingException, Exception{
+public void LA_Common_RE_992()throws DecodingException, UnsupportedEncodingException, Exception{
 	
-	TEST_CASE_EXTERNAL_ID = 701;
-	TEST_CASE_ID = 831548;
+	TEST_CASE_EXTERNAL_ID = 992;
+	TEST_CASE_ID = 832421;
 	TEST_CASE_STEP_NUM = 5;
 	TEST_CASE_VERSION = 1;
 	
@@ -176,7 +426,7 @@ public void LA_WildCard_RE_701() throws DecodingException, UnsupportedEncodingEx
 	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
 	xml = String.format(xml, "\""+DBUser+"\"");
 	
-	String tblFilter = "LIKE '"+_credentials.DBUser+"'.'a%'";
+	String tblFilter = "LIKE '____________________%'.";
 	String tbsFilter = "";
 
 	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
@@ -194,7 +444,7 @@ public void LA_WildCard_RE_701() throws DecodingException, UnsupportedEncodingEx
 					  AryLogAnalysis.SQLDirection.REDO,
 					  AryLogAnalysis.Mode.SLR,
 					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
+					  AryLogAnalysis.LobIgnore.CAPTURE,
 					  AryLogAnalysis.Transactions.COMMITTED);
 	
 	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
@@ -206,13 +456,14 @@ public void LA_WildCard_RE_701() throws DecodingException, UnsupportedEncodingEx
     assertTrue(expectedResultsList.isEmpty());
 }
 
+
 @Test
-public void LA_WildCard_RE_702() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	TEST_CASE_EXTERNAL_ID = 702;
-	TEST_CASE_ID = 831551;
-	TEST_CASE_STEP_NUM = 5;
-	TEST_CASE_VERSION = 1;
+public void LA_Common_RE_225()throws DecodingException, UnsupportedEncodingException, Exception{
+
+	TEST_CASE_EXTERNAL_ID = 225;
+	TEST_CASE_ID = 825982;
+	TEST_CASE_STEP_NUM = 4;
+	TEST_CASE_VERSION = 3;
 	
 	TestLinkUtil.connect( testlinkURL, testlinkKey);
 	
@@ -222,191 +473,7 @@ public void LA_WildCard_RE_702() throws DecodingException, UnsupportedEncodingEx
 	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
 	xml = String.format(xml, "\""+DBUser+"\"");
 	
-	String tblFilter = "LIKE '%'.'a%'";
-	String tbsFilter = "";
-
-	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-	
-	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
-	
-	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
-
-    expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());
-}
-
-@Test
-public void LA_WildCard_RE_703() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	TEST_CASE_EXTERNAL_ID = 703;
-	TEST_CASE_ID = 831554;
-	TEST_CASE_STEP_NUM = 5;
-	TEST_CASE_VERSION = 1;
-	
-	TestLinkUtil.connect( testlinkURL, testlinkKey);
-	
-	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	
-	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-	xml = String.format(xml, "\""+DBUser+"\"");
-	
-	String tblFilter = "LIKE '%'.'%M%'";
-	String tbsFilter = "";
-
-	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-	
-	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
-	
-	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
-
-    expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());
-}
-
-@Test
-public void LA_WildCard_RE_704() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	TEST_CASE_EXTERNAL_ID = 704;
-	TEST_CASE_ID = 831557;
-	TEST_CASE_STEP_NUM = 5;
-	TEST_CASE_VERSION = 1;
-	
-	TestLinkUtil.connect( testlinkURL, testlinkKey);
-	
-	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	
-	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-	xml = String.format(xml, "\""+DBUser+"\"");
-	
-	String tblFilter = "LIKE 'P%'.'a%'";
-	String tbsFilter = "";
-    
-    params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-	
-	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
-	
-	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
-
-    expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());
-}
-
-@Test
-public void LA_WildCard_RE_715() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	TEST_CASE_EXTERNAL_ID = 715;
-	TEST_CASE_ID = 831590;
-	TEST_CASE_STEP_NUM = 5;
-	TEST_CASE_VERSION = 1;
-	
-	TestLinkUtil.connect( testlinkURL, testlinkKey);
-	
-	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	
-	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-	xml = String.format(xml, "\""+DBUser+"\"");
-	
-	String tblFilter = "LIKE 'm%'.'a%' LIKE 'M%'.'A%'";
-	String tbsFilter = "";
-
-	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-	
-	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
-	
-	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
-
-    expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());
-}
-
-@Test
-public void LA_WildCard_RE_716() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	TEST_CASE_EXTERNAL_ID = 716;
-	TEST_CASE_ID = 831593;
-	TEST_CASE_STEP_NUM = 5;
-	TEST_CASE_VERSION = 1;
-	
-	TestLinkUtil.connect( testlinkURL, testlinkKey);
-	
-	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	
-	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-	xml = String.format(xml, "\""+DBUser+"\"");
-	
-	String tblFilter = "LIKE 'low%'.'%' LIKE 'dot%'.'%'";
+	String tblFilter = _credentials.DBUser+".U_table";
 	String tbsFilter = "";
 
 	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
@@ -424,7 +491,7 @@ public void LA_WildCard_RE_716() throws DecodingException, UnsupportedEncodingEx
 					  AryLogAnalysis.SQLDirection.UNDO,
 					  AryLogAnalysis.Mode.SLR,
 					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
+					  AryLogAnalysis.LobIgnore.CAPTURE,
 					  AryLogAnalysis.Transactions.COMMITTED);
 	
 	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
@@ -434,195 +501,7 @@ public void LA_WildCard_RE_716() throws DecodingException, UnsupportedEncodingEx
 
     expectedResultsList.removeAll(obtainedResultsList);
     assertTrue(expectedResultsList.isEmpty());
-}
-
-
-@Test
-public void LA_WildCard_RE_718() throws DecodingException, UnsupportedEncodingException, Exception{
 	
-	TEST_CASE_EXTERNAL_ID = 718;
-	TEST_CASE_ID = 831599;
-	TEST_CASE_STEP_NUM = 7;
-	TEST_CASE_VERSION = 1;
-	
-	TestLinkUtil.connect( testlinkURL, testlinkKey);
-	
-	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	
-	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-	xml = String.format(xml, "\""+DBUser+"\"");
-	
-	String tblFilter = "LIKE 'low%'.'%' LIKE 'dot%'.'%'";
-	String tbsFilter = "";
-
-	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-	
-	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
-	
-	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
-
-    expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());
-}
-
-@Test
-public void LA_WildCard_RE_719() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	TEST_CASE_EXTERNAL_ID = 719;
-	TEST_CASE_ID = 831602;
-	TEST_CASE_STEP_NUM = 7;
-	TEST_CASE_VERSION = 1;
-	
-	TestLinkUtil.connect( testlinkURL, testlinkKey);
-	
-	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	
-	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-	xml = String.format(xml, "\""+DBUser+"\"");
-	
-	String tblFilter = "LIKE 'miX%'.'%'";
-	String tbsFilter = "";
-
-	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-	
-	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
-	
-	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
-
-    expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());
-}
-
-@Test
-public void LA_WildCard_RE_902() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	TEST_CASE_EXTERNAL_ID = 902;
-	TEST_CASE_ID = 832151;
-	TEST_CASE_STEP_NUM = 6;
-	TEST_CASE_VERSION = 1;
-	
-	TestLinkUtil.connect( testlinkURL, testlinkKey);
-	
-	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	
-	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-	xml = String.format(xml, "\""+DBUser+"\"");
-	
-	String tblFilter = "LIKE 'low%'.'%' LIKE 'dot%'.'%'";
-	String tbsFilter = "";
-
-	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-
-	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
-	
-	DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
-
-    expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());
-}
-
-@Ignore
-@Test
-public void LA_WildCard_RE_2334() throws DecodingException, UnsupportedEncodingException, Exception{
-	
-	/*TEST_CASE_EXTERNAL_ID = 2334;
-	TEST_CASE_ID = 831512;
-	TEST_CASE_STEP_NUM = 7;
-	TEST_CASE_VERSION = 1;
-	
-	TestLinkUtil.connect( testlinkURL, testlinkKey);
-	
-	String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
-	
-	String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
-	xml = String.format(xml, "\""+DBUser+"\"");*/
-    
-	String tblFilter = "";
-	String tbsFilter = "";
-	String authID =_credentials.DBUser;
-	
-//	params.put(AryLogAnalysis.OPT_AUTHLIST, authID);
-	params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
-	params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
-
-	
-	la.RunLogAnalysis(
-					  DB2InstanceName,
-					  TargetDB, 
-					  DSName,
-					  _credentials,
-					  params,
-					  AryLogAnalysis.Operation.INSERTS+
-					  AryLogAnalysis.Operation.UPDATES+
-					  AryLogAnalysis.Operation.DELETES, 
-					  AryLogAnalysis.SQLDirection.REDO,
-					  AryLogAnalysis.Mode.SLR,
-					  AryLogAnalysis.ReportType.FULL,
-					  AryLogAnalysis.LobIgnore.IGNORE,
-					  AryLogAnalysis.Transactions.COMMITTED);
-	
-	/*DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
-	
-	List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
-	List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
-
-    expectedResultsList.removeAll(obtainedResultsList);
-    assertTrue(expectedResultsList.isEmpty());*/
-}
+	}
 
 }

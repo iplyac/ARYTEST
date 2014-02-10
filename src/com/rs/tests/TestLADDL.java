@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.ws.commons.util.Base64.DecodingException;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -21,8 +22,7 @@ import com.rs.utils.TestCaseSetUp;
 import com.rs.utils.TestLinkUtil;
 import com.rs.utils.XmlParser;
 
-public class TestLACarolB extends ATestCases {
-
+public class TestLADDL extends ATestCases{
 	@BeforeClass	
 	public static void setUpBeforeClass() throws FileNotFoundException   
 		{
@@ -31,12 +31,11 @@ public class TestLACarolB extends ATestCases {
 			_credentials.DBUser = DBUser;
 			_credentials.DBPassword = DBPassword;
 
-			PathToSQL = Paths.get(PathToSQL.toString(), "carolb"); 
+			PathToSQL = Paths.get(PathToSQL.toString(), "ddl"); 
 			
 			String [] xmlFiles = {
-									"createCarolB.xml",
-									"modCarolB.xml",
-									"modCarolB2.xml"
+									"index.xml",
+									"schema.xml"
 								 };
 			
 			TestCaseSetUp.dropDB(TargetDB);
@@ -53,14 +52,14 @@ public class TestLACarolB extends ATestCases {
 			
 		}
 	
-	
+
 	@Test
-	public void LA_CarolB_RE_899() throws DecodingException, UnsupportedEncodingException, Exception{
+	public void LA_DDL_918()throws DecodingException, UnsupportedEncodingException, Exception{
 		
-		TEST_CASE_EXTERNAL_ID = 899;
-		TEST_CASE_ID = 832142;
-		TEST_CASE_STEP_NUM = 5;
-		TEST_CASE_VERSION = 1;
+		TEST_CASE_EXTERNAL_ID = 918;
+		TEST_CASE_ID = 832199;
+		TEST_CASE_STEP_NUM = 6;
+		TEST_CASE_VERSION =1;
 		
 		TestLinkUtil.connect( testlinkURL, testlinkKey);
 		
@@ -70,10 +69,58 @@ public class TestLACarolB extends ATestCases {
 		String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
 		xml = String.format(xml, "\""+DBUser+"\"");
 		
-		String tblFilter = _credentials.DBUser+".CarolB";
+		String tblFilter = _credentials.DBUser+".MYTABLE";
 		String tbsFilter = "";
+
+		params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+		params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
+		
+		la.RunLogAnalysis(
+						  DB2InstanceName,
+						  TargetDB, 
+						  DSName,
+						  _credentials,
+						  params,
+						  AryLogAnalysis.Operation.INSERTS+
+						  AryLogAnalysis.Operation.UPDATES+
+						  AryLogAnalysis.Operation.DELETES, 
+						  AryLogAnalysis.SQLDirection.REDO,
+						  AryLogAnalysis.Mode.SLR,
+						  AryLogAnalysis.ReportType.FULL,
+						  AryLogAnalysis.LobIgnore.IGNORE,
+						  AryLogAnalysis.Transactions.COMMITTED);
+		
+		DataStoreUtil.connect(HostName, DB2InstancePort, DSName, DSUser, DSPassword);
+		
+		List <String> expectedResultsList = XmlParser.getResultsStringList(xml);
+		List <String> obtainedResultsList = DataStoreUtil.getObtainedResultsList(sqlKey, la.getSessionID());
+
+	    expectedResultsList.removeAll(obtainedResultsList);
+	    assertTrue(expectedResultsList.isEmpty());
 	    
-	    params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
+	}
+	
+	@Ignore
+	@Test
+	public void LA_DDL_919()throws DecodingException, UnsupportedEncodingException, Exception{
+		
+		TEST_CASE_EXTERNAL_ID = 919;
+		TEST_CASE_ID = 832202;
+		TEST_CASE_STEP_NUM = 6;
+		TEST_CASE_VERSION =1;
+		
+		TestLinkUtil.connect( testlinkURL, testlinkKey);
+		
+		String sqlKey   = TestLinkUtil.getSqlKeyFromActions("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+		String FileName = TestLinkUtil.getFileNameFromExpectedResults("RE-"+ TEST_CASE_EXTERNAL_ID, TEST_CASE_VERSION, TEST_CASE_STEP_NUM);
+		
+		String xml = TestLinkUtil.getAttachmentContent(TEST_CASE_ID, TEST_CASE_EXTERNAL_ID, FileName);
+		xml = String.format(xml, "\""+DBUser+"\"");
+		
+		String tblFilter = "'SCHEMANAME31'. 'SCHEMANAME30'. 'SCHEMANAME21'. 'SCHEMANAME20'. 'SCHEMANAME11'. 'SCHEMANAME10'. 'SCHEMANAME01'.";
+		String tbsFilter = "";
+
+		params.put(AryLogAnalysis.OPT_TABLES, tblFilter);
 		params.put(AryLogAnalysis.OPT_TBSPACES, tbsFilter);
 		
 		la.RunLogAnalysis(
@@ -99,4 +146,5 @@ public class TestLACarolB extends ATestCases {
 	    expectedResultsList.removeAll(obtainedResultsList);
 	    assertTrue(expectedResultsList.isEmpty());
 	}
+	
 }
