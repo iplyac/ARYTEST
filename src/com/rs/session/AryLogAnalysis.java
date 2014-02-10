@@ -2,6 +2,7 @@ package com.rs.session;
 
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.rs.tests.ATestCases;
 import com.rs.utils.AryCredentials;
@@ -27,11 +28,16 @@ public class AryLogAnalysis extends ArySession{
 		public final static String DELETES = "d";
 	}
 
+	public static class Transactions {
+		public final static String COMMITTED = "c";
+		public final static String PARTIAL = "p";
+		public final static String UNCOMMITTED = "u";
+		public final static String ROLLEDBACK = "r";
+	}
+	
 	public static class ReportType{
 		public final static String SUMMARY = "sum";
 		public final static String FULL = "full";
-//		public final static String SUMMARY = "ARYLA:SUM";
-//		public final static String FULL = "ARYLA:FULL";
 	}
 	
 	public static class LobIgnore{
@@ -87,6 +93,10 @@ public class AryLogAnalysis extends ArySession{
 		return " -a " + Operations;
 	}
 
+	protected String setTransactions(String Transactions) {
+		return " -z " + Transactions;
+	}
+	
 	protected String setObjectsSet(String ObjectsSet) {
 		return " -l \"" + ObjectsSet + "\"";
 		
@@ -126,26 +136,23 @@ public class AryLogAnalysis extends ArySession{
 	 * @param LobIgnore
 	 * @return
 	 */
-	public String makeLogAnalysisCommand(String ARY_PATH,
+	
+	public String makeLogAnalysisCommand(
 			String DB2InstanceName, String TargetDB, String DSName,
-			AryCredentials _credentials, String tblFilter,String tbsFilter,String pgFilter,
+			AryCredentials _credentials, Map<String, String> params,
 			String Operations, String SQLDirection, String LAMode,
-			String LAReportType, String LobIgnore) {
-		
-		this.tblFilter = tblFilter;
-		this.tbsFilter = tbsFilter;
-		this.pgFilter = pgFilter;
+			String LAReportType, String LobIgnore, String Transactions) {
 		
 		opts = new ArrayList<AryOpt>();
 		
-        this.addAryOption(AryLogAnalysis.OPT_PGROUPS, this.pgFilter);
-        this.addAryOption(AryLogAnalysis.OPT_TABLES, this.tblFilter + PERMANENT_TABLE_FILTER);
-        this.addAryOption(AryLogAnalysis.OPT_TBSPACES, this.tbsFilter + PERMANENT_TBS_FILTER);
-        this.addAryOption(AryLogAnalysis.OPT_DB_LOGLOC, logLoc);
-        this.addAryOption(AryLogAnalysis.OPT_DB_BACKUPLOC, backupLoc);
-        this.addAryOption(AryLogAnalysis.OPT_APPID, appID);
-        this.addAryOption(AryLogAnalysis.OPT_APPNAME, appName);
-        this.addAryOption(AryLogAnalysis.OPT_AUTHLIST, authList);
+        this.addAryOption(OPT_PGROUPS, params.get(OPT_PGROUPS));
+        this.addAryOption(OPT_TABLES, params.get(OPT_TABLES) + PERMANENT_TABLE_FILTER);
+        this.addAryOption(OPT_TBSPACES, params.get(OPT_TBSPACES) + PERMANENT_TBS_FILTER);
+        this.addAryOption(OPT_DB_LOGLOC, params.get(OPT_DB_LOGLOC));
+        this.addAryOption(OPT_DB_BACKUPLOC, params.get(OPT_DB_BACKUPLOC));
+        this.addAryOption(OPT_APPID, params.get(OPT_APPID));
+        this.addAryOption(OPT_APPNAME, params.get(OPT_APPNAME));
+        this.addAryOption(OPT_AUTHLIST, params.get(OPT_AUTHLIST));
         
         boolean isMRT = (LAMode.equals(Mode.MRT)) ? true : false;
 
@@ -165,7 +172,8 @@ public class AryLogAnalysis extends ArySession{
 				+ setLAMode(LAMode)
 				+ setTargetDB(TargetDB)
 				+ setLogAnalysisReportType(LAReportType)
-				+ setLobIgnore(LobIgnore);
+				+ setLobIgnore(LobIgnore)
+				+ setTransactions(Transactions);
 	}
 	
 	/**
@@ -185,26 +193,23 @@ public class AryLogAnalysis extends ArySession{
 	 *  @param Ignore lob data
 	 */
 	
-	public void RunLogAnalysis(String ARY_PATH, String DB2InstanceName,
-			String TargetDB, String DSName, AryCredentials _credentials,
-			String tblFilter, String tbsFilter, String pgFilter, String Operations, String SQLDirection,
-			String LAMode, String LAReportType, String LobIgnore)
-	{
-		runprocess(makeLogAnalysisCommand(ARY_PATH, 
-											  DB2InstanceName,
-											  TargetDB,
-											  DSName,
-											  _credentials,
-											  tblFilter,
-											  tbsFilter,
-											  pgFilter,
-											  Operations,
-											  SQLDirection,
-											  LAMode,
-											  LAReportType,
-											  LobIgnore));
+
+	public void RunLogAnalysis(String DB2InstanceName,
+			String TargetDB, String DSName, AryCredentials _credentials,Map<String, String> params,
+			String Operations, String SQLDirection,
+			String LAMode, String LAReportType, String LobIgnore, String Transactions){
+		runprocess(makeLogAnalysisCommand( 
+				  DB2InstanceName,
+				  TargetDB,
+				  DSName,
+				  _credentials,
+				  params,
+				  Operations,
+				  SQLDirection,
+				  LAMode,
+				  LAReportType,
+				  LobIgnore,
+				  Transactions));
 	}
-	
-	
 	
 }

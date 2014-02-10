@@ -204,6 +204,7 @@ private void fillDsOpts()
         pStmt = DataStoreUtil.getDsConnection().prepareStatement(ArySqlQueries.getQuery("fillOptsQuery"));
         for (AryOpt opt : opts)
         {
+        	if (opt.getValue()!=null)
 				if ((opt.getValue().length() > 0)) {
 					pStmt.setInt(1, SessionID);
 					pStmt.setInt(2, opt.getPartition());

@@ -151,9 +151,11 @@ public class DataStoreUtil {
 	    	ResultSet obtainedResults = DataStoreUtil.getResultForStatement(sqlKey, getIDPart(sessionID));
 	    	String tmp = null;
 			while (obtainedResults.next()){
-				tmp = obtainedResults.getString(1).toString().replace(" ", "");
+				tmp = obtainedResults.getString(1).toString().replace(" ", ""); // delete all spaces
+				
 				if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-					tmp = tmp.replace("E+0", "E+");
+				     tmp = tmp.replace("E+0", "E+");
+				else tmp = tmp.replace("E-", "E-0");
 				obtainedResultsList.add(tmp);
 			}
 	    } catch (SQLException ex) {
@@ -237,8 +239,8 @@ public class DataStoreUtil {
 	}
 	
 	static public void close(Connection conn){
-		
 		try {
+			ConsoleWriter.println("Closing Connection " + conn.getMetaData().getURL());
 			conn.close();
 		} catch (SQLException ex) {
 			 System.err.println("SQLException information");

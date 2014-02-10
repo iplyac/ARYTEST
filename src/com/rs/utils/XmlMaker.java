@@ -63,7 +63,8 @@ public class XmlMaker {
 		try
 		{
 			
-		  DataStoreUtil.connect(settings.host, settings.port, settings.dsname, settings.dsuser, settings.dspassword);
+//		  DataStoreUtil.connect(settings.host, settings.port, settings.dsname, settings.dsuser, settings.dspassword);
+		  DataStoreUtil.dsConnection = DataStoreUtil.connect(settings.host, settings.port, settings.dsname, settings.dsuser, settings.dspassword);
 		  List <String> ResultsList = DataStoreUtil.getObtainedResultsList(settings.sqlkey, settings.sessionid);
 			
 		  DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();

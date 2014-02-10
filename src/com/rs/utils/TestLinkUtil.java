@@ -62,6 +62,8 @@ public class TestLinkUtil {
 				  .getSteps().get(stepnum).getActions().replaceAll("\\<[^>]*>|\\s","");
 	}
 
+
+
 	/**
 	 * Get archive file name from "expected results" column
 	 * 

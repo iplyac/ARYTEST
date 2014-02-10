@@ -34,6 +34,11 @@ public class TestCaseSetUp {
 			runCMD("db2 create db " + TargetDB);
 	}
 	
+	public static void updateLogarchcompr1(String TargetDB){
+		ConsoleWriter.println("enable log compression "+ TargetDB +"...");
+		runCMD("db2 update db cfg for "+TargetDB+" using logarchcompr1 ON");
+}
+	
 	public static void dropDB(String TargetDB){
 			ConsoleWriter.println("drop database "+ TargetDB +"...");
 			runCMD("db2 drop db " + TargetDB);
@@ -51,7 +56,15 @@ public class TestCaseSetUp {
 
 	public static void makeOfflineBackup(String TargetDB,String BACKUP_PATH){
 			ConsoleWriter.println("backup database...");
-			runCMD("db2 backup db "+TargetDB+" on all dbpartitionnums to "+BACKUP_PATH);
+			try {
+				Thread.sleep(5000);
+				runCMD("db2 backup db "+TargetDB+" on all dbpartitionnums to "+BACKUP_PATH);
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				ConsoleWriter.println("An error occurred during backup or sleep operation...");
+				e.printStackTrace();
+			}
+			
 	}
 	
 	public static void attachtoInstance(String DB2InstanceName, String DSUser, String DSPassword){
@@ -123,6 +136,7 @@ public class TestCaseSetUp {
 						{
 							cStmt = DataStoreUtil.dbConnection.prepareCall(statement.getTextContent());
 							cStmt.execute();
+							cStmt.close();
 						}	
 						else{
 						pStmt = DataStoreUtil.dbConnection.prepareStatement(statement.getTextContent());
@@ -136,7 +150,7 @@ public class TestCaseSetUp {
 						}
 					} 
 					catch (SQLException ex) {
-						System.err.println("SQLException information");
+						System.err.println("\n\nSQLException information for statement "+ statement.getAttribute("stmt_id"));
 					      while(ex!=null) {
 					        System.err.println ("Error msg: "  + ex.getMessage());
 					        System.err.println ("SQLSTATE: "   + ex.getSQLState());
