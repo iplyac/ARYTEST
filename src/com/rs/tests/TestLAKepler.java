@@ -34,7 +34,7 @@ public class TestLAKepler extends ATestCases {
 		
 		withLob = false;
 		
-		String [] xmlFiles = {"index_on_expression.xml",
+		String [] xmlFiles = {"re-192.xml","index_on_expression.xml",
 							  "createTS.xml",
 							  "createTables1.xml",
 							  "createTables2.xml",
@@ -44,8 +44,8 @@ public class TestLAKepler extends ATestCases {
 							  "insert1.xml",
 							  "insert2.xml",
 							  "insert31.xml",
-							  "insert51.xml",
-							  "re-180.xml"};
+							  "insert51.xml"
+							  };
 		
 		TestCaseSetUp.dropDB(TargetDB);
 		TestCaseSetUp.createDB(TargetDB);
@@ -58,7 +58,6 @@ public class TestLAKepler extends ATestCases {
 		TestCaseSetUp.runSQL(xmlFiles, withLob);
 
 		slr.RunSLR(ARY_PATH, DB2InstanceName, TargetDB, DSName, _credentials, DataStoreUtil.isSlrExist(TargetDB) ? ArySLR.SLROperation.REBUILD : ArySLR.SLROperation.CREATE);
-
 		}
 
 

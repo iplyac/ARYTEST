@@ -54,6 +54,11 @@ public class TestCaseSetUp {
 			runCMD("db2 update db cfg for "+TargetDB+" using logarchmeth1 disk:" + LOGARCHMETH1);
 	}
 
+	public static void updateTableOrganization(String TargetDB,String DFT_TABLE_ORG){
+		ConsoleWriter.println("update database config...");
+		runCMD("db2 update db cfg for "+TargetDB+" USING DFT_TABLE_ORG " + DFT_TABLE_ORG);
+}
+	
 	public static void makeOfflineBackup(String TargetDB,String BACKUP_PATH){
 			ConsoleWriter.println("backup database...");
 			try {
